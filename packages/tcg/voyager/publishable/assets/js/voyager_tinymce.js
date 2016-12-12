@@ -13,8 +13,8 @@ $(document).ready(function(){
   tinymce.init({
     menubar: false,
     selector:'textarea.richTextBox',
-    skin: 'voyager',
-    plugins: 'link, image, code, youtube, giphy',
+    skin: 'voyager, image, code, youtube, giphy',
+    plugins: 'link',
     extended_valid_elements : 'input[onclick|value|style|type]',
     file_browser_callback: function(field_name, url, type, win) {
             if(type =='image'){

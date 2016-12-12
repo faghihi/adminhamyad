@@ -63,44 +63,62 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <i class="voyager-character"></i> Post Title
-                                <span class="panel-desc"> The title for your post</span>
+                                <i class="voyager-character"></i> Name
+                                <span class="panel-desc"> title for course</span>
                             </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" name="title" placeholder="Title" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
+                            <input type="text" class="form-control" name="title" placeholder="Title" value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
                         </div>
                     </div>
 
                     <!-- ### CONTENT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-book"></i> Post Content</h3>
+                            <h3 class="panel-title"><i class="icon wb-book"></i> description</h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-expand" data-toggle="panel-fullscreen" aria-hidden="true"></a>
                             </div>
                         </div>
                         <textarea class="richTextBox" name="body" style="border:0px;">
-                            @if(isset($dataTypeContent->body)){{ $dataTypeContent->body }}@endif
+                            @if(isset($dataTypeContent->description)){{ $dataTypeContent->description }}@endif
                         </textarea>
                     </div><!-- .panel -->
 
                     <!-- ### EXCERPT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Excerpt <small>Small description of this post</small></h3>
+                            <h3 class="panel-title">Tags</h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
+                        <div>
+                            @foreach(\App\Tag::all() as $tag)
+                                {{$tag->id}}
+                                {{$tag->tag_name}}
+                            @endforeach
+                        </div>
                         <div class="panel-body">
-                          <textarea class="form-control" name="excerpt">
-                              @if (isset($dataTypeContent->excerpt)){{ $dataTypeContent->excerpt }}@endif
-                          </textarea>
+                          <input class="form-control" name="excerpt" value="
+                              @if (isset($dataTypeContent->tags))
+                                  @foreach($dataTypeContent->tags as $tag)
+                                      {{$tag->tag_name}}
+                                  @endforeach
+                              @endif
+                                  ">
+                          </input>
                       </div>
+                    </div>
+                    <div>
+                        @foreach($dataTypeContent->section as $sec)
+                            {{$sec->id}}
+                            {{$sec->name}}
+                            <br>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -114,28 +132,12 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="name">URL slug</label>
-                                <input type="text" class="form-control" name="slug" placeholder="slug" value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Post Status</label>
-                                <select class="form-control" name="status">
-                                    <option value="PUBLISHED" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED'){{ 'selected="selected"' }}@endif>published</option>
-                                    <option value="DRAFT" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT'){{ 'selected="selected"' }}@endif>draft</option>
-                                    <option value="PENDING" @if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING'){{ 'selected="selected"' }}@endif>pending</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Post Category</label>
+                                <label for="name">Category</label>
                                 <select class="form-control" name="category_id">
                                     @foreach(\App\Category::all() as $category)
                                     <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Featured</label>
-                                <input type="checkbox" name="featured" @if(isset($dataTypeContent->featured) && $dataTypeContent->featured){{ 'checked="checked"' }}@endif>
                             </div>
                         </div>
                     </div>
@@ -143,7 +145,7 @@
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> Post Image</h3>
+                            <h3 class="panel-title"><i class="icon wb-image"></i> Course Image</h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -166,20 +168,10 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="name">Meta Description</label>
-                                <textarea class="form-control" name="meta_description">
+                                <label for="name">Price</label>
+                                <input class="form-control" name="meta_description">
                                     @if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Meta Keywords</label>
-                                <textarea class="form-control" name="meta_keywords">
-                                    @if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif
-                                </textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">SEO Title</label>
-                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
+                                </input>
                             </div>
                         </div>
                     </div>
