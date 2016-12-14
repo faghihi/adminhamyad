@@ -28,3 +28,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/Picker','\TCG\Voyager\Http\Controllers\VoyagerMediaController@picker');
 Route::get('/Test','\TCG\Voyager\Http\Controllers\VoyagerMediaController@test');
+
+Route::get('configs',function (){
+    phpinfo();
+});

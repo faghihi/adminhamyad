@@ -41,6 +41,8 @@ var VoyagerMedia = function(o){
 					toastr.success(res.message, "Sweet Success!");
 				} else {
 					toastr.error(res.message, "Whoopsie!");
+					// console.log(res.message);
+					// console.log('salam');
 				}
 			},
 			error: function(e, res, xhr){

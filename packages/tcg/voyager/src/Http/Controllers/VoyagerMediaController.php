@@ -29,13 +29,13 @@ class VoyagerMediaController extends Controller
         return view('voyager::media.index');
     }
 
-    public function picker(){
-        return view('picker');
-    }
-
-    public function test(){
-        return view('test');
-    }
+//    public function picker(){
+//        return view('picker');
+//    }
+//
+//    public function test(){
+//        return view('test');
+//    }
     public function files(Request $request)
     {
         $folder = $request->folder;
