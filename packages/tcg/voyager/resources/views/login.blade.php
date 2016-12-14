@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="admin login">
     <meta name="author" content="">
-    <title>Admin Login</title>
+    <title>ورود مدیر</title>
     {{-- Voyager CSS --}}
     <link rel="stylesheet" href="{{ config('voyager.assets_path') }}/css/voyager.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,300italic">
@@ -88,12 +88,13 @@
         }
 
         #login_section h2 {
-            text-align: left;
-            margin-left: 50px;
+            text-align: right;
+            margin-right: 50px;
             font-weight: 200;
             margin-bottom: 0;
             margin-top: 3px;
             color: #444;
+            direction: rtl;
         }
 
         #login_section .btn {
@@ -103,7 +104,7 @@
             width: 380px;
             margin-left: 0;
             display: block;
-            text-align: left;
+            text-align: right;
             padding: 15px 20px 15px 50px;
             border-width: 0;
         }
@@ -121,8 +122,9 @@
         #login_section p {
             font-weight: 100;
             margin-top: 10px;
-            float: left;
-            margin-left: 50px;
+            float: right;
+            margin-right: 50px;
+            direction: rtl;
         }
 
         #login_section .content {
@@ -198,7 +200,7 @@
     <div id="title_section">
         <img class="logo-img" src="{{ config('voyager.assets_path') }}/images/logo-icon-light.png" alt="Admin Login">
         <div class="copy">
-            <h1>{{ Voyager::setting('admin_title', 'Voyager') }}</h1>
+            <h1>{{ Voyager::setting('admin_title', 'VOYAGER') }}</h1>
             <p>{{ Voyager::setting('admin_description', 'Welcome to Voyager. The Missing Admin for Laravel') }}</p>
         </div>
         <div style="clear:both"></div>
@@ -206,23 +208,24 @@
 
     <div id="login_section">
         <div class="content">
-            <h2>Sign In</h2>
-            <p>Sign in below:</p>
+            <h2>ورود</h2>
+            <p>در ثبت نام زیر:
+            </p>
             <div style="clear:both"></div>
             <form action="{{ route('voyager.login') }}" method="POST" id="login">
                 {{ csrf_field() }}
                 <input type="text" class="form-control" name="email" placeholder="email address" value="{{ old('email') }}">
                 <input type="password" class="form-control" name="password" placeholder="password">
                 <button class="btn btn-primary btn-login" id="voyager-login-btn">
-                    <span class="login_text"><i class="voyager-lock"></i> Login</span>
+                    <span class="login_text"> ورود <i class="voyager-lock"></i></span>
                     <span class="login_loader">
-                        <img class="btn-loading" src="{{ config('voyager.assets_path') }}/images/logo-icon-light.png"> Logging in
+                        <img class="btn-loading" src="{{ config('voyager.assets_path') }}/images/logo-icon-light.png"> در حال ورود
                     </span>
                 </button>
             </form>
             @if (count($errors))
-                <div class="error-login">
-                    The given credentials don't match with an user registered.
+                <div class="error-login" style="direction: rtl">
+                    اعتبار داده با یک کاربر ثبت شده مطابقت ندارد.
                 </div>
             @endif
         </div>
