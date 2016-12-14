@@ -3,9 +3,12 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
+        @if($dataType->slug != 'contacts' && $dataType->slug != 'reviews')
         <a href="{{ route($dataType->slug.'.create') }}" class="btn btn-success">
-            <i class="voyager-plus"></i> Add New
+                <i class="voyager-plus"></i> Add New
         </a>
+        @endif
+
     </h1>
 @stop
 
@@ -35,12 +38,36 @@
                                     <td>
                                         @if($row->type == 'image')
                                             <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+
+                                        @elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $data->{$row->field} == 0)
+                                            درصد
+                                        @elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $data->{$row->field} == 1)
+                                            نقدی
+
+                                        @elseif($row->display_name == Config::get('settings.enable') && $dataType->slug ==  'reviews' && $data->{$row->field} == 0)
+                                            تایید نشده
+                                        @elseif($row->display_name == Config::get('settings.enable') && $dataType->slug ==  'reviews' && $data->{$row->field} == 1)
+                                            تایید شده
+                                        @elseif($row->display_name == Config::get('settings.user'))
+                                            {{\App\NormalUser::find($data->{$row->field})->email }}
+                                        @elseif( in_array($row->display_name, Config::get('settings.prices_list')))
+                                            @if($data->{$row->field} > 1000)
+                                                <?php $price=$data->{$row->field}/1000 . ' هزار تومان'?>
+                                            @else
+                                                <?php $price=$data->{$row->field} . ' تومان'?>
+                                            @endif
+                                            {{$price}}
                                         @else
-                                            {{ $data->{$row->field} }}
+                                                {{ $data->{$row->field} }}
                                         @endif
                                     </td>
                                     @endforeach
                                     <td class="no-sort no-click">
+                                        @if($dataType->slug == 'providers')
+                                            <a href="{{ route('voyager.bread.showall', $data->id) }}" class="btn-sm btn-warning pull-right">
+                                                <i class="voyager-eye"></i> Show All
+                                            </a>
+                                        @endif
                                         <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
                                             <i class="voyager-trash"></i> Delete
                                         </div>
@@ -50,6 +77,7 @@
                                         <a href="{{ route($dataType->slug.'.show', $data->id) }}" class="btn-sm btn-warning pull-right">
                                             <i class="voyager-eye"></i> View
                                         </a>
+
                                     </td>
                                 </tr>
                                 @endforeach

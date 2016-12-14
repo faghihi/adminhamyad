@@ -2,6 +2,7 @@
 
 namespace TCG\Voyager\Http\Controllers;
 
+use App\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -371,6 +372,22 @@ class VoyagerBreadController extends Controller
     {
         if (Storage::exists($path)) {
             Storage::delete($path);
+        }
+    }
+
+    public function showall($id)
+    {
+        $provider = Provider::findorfail($id);
+
+        $courses=$provider->courses;
+//        return $provider;
+        foreach ($courses as $course) {
+            $course['editlink']='/admin/courses/'.$course['id'].'/edit';
+            $course['showlink']='/admin/courses/'.$course['id'];
+        }
+        foreach ($courses as $course){
+            echo "<div><p>".$course['name']."</p><a href=\"".$course['editlink']."\">editlink</a><br><a href=\"".$course['showlink']."\">showlink</a>";
+            echo '<br>';
         }
     }
 }
