@@ -42,7 +42,78 @@
 
     @yield('css')
     @yield('head')
+    <style>
+        .app-container.expanded .content-container .navbar-top {
+            padding-right: 200px;
+        }
+        .flat-blue .side-menu.sidebar-inverse{
+            right: 0;
+            direction: rtl;
+        }
 
+        .navbar-header {
+            float: right;
+        }
+        .hamburger {
+            float: right;
+        }
+        .container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+        .app-container .side-body {
+            margin-right: 45px;
+            margin-left: -15px;
+        }
+        .app-container.expanded .side-body {
+            margin-right: 235px;
+            margin-left:-15px;
+        }
+        .navbar {
+            padding-left: 0px;
+
+        }
+        .app-container.expanded .content-container .navbar-top {
+            padding-left: 0;
+        }
+        .breadcrumb > li + li:before {
+            content: '\e039';
+        }
+        .dropdown-menu>li>a {
+            text-align: right;
+        }
+        .dropdown-menu>li{
+            direction: rtl;
+        }
+        .navbar .dropdown.profile .dropdown-menu li.profile-img img.profile-img {
+            float: right;
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        .navbar .dropdown.profile .dropdown-menu h5 {
+           float: right;
+        }
+        .navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h6 {
+             float: right;
+        }
+        .flat-blue .app-footer {
+            text-align: left;
+        }
+        .site-footer-right {
+            padding-left: 20px;
+        }
+        .app-container .side-menu:hover .panel.widget .avatar {
+            float: right;
+            margin-right: 10px;
+        }
+        .app-container .side-menu .panel.widget h4 {
+            float: right;
+            right: 66px;
+            left:0;
+            text-align: right;
+            top:0;
+        }
+    </style>
 </head>
 
 <body class="flat-blue">
@@ -68,12 +139,12 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <span class="hamburger-inner"></span>
                     </div>
 
-                    <ol class="breadcrumb">
+                    <ol class="breadcrumb" style="direction: rtl">
                         @if(count(Request::segments()) == 1)
-                            <li class="active"><i class="voyager-boat"></i> Dashboard</li>
+                            <li class="active"><i class="voyager-boat"></i>  میز کار </li>
                         @else
                             <li class="active">
-                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> Dashboard</a>
+                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i>  میز کار </a>
                             </li>
                         @endif
                         <?php $breadcrumb_url = ''; ?>
@@ -94,12 +165,12 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                     </ol>
 
 
-                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
                         <i class="voyager-list icon"></i>
                     </button>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                <ul class="nav navbar-nav navbar-left">
+                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
                         <i class="voyager-x icon"></i>
                     </button>
 
@@ -118,10 +189,11 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> Profile</a>
+                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> مشخصات كاربر </a>
                             </li>
                             <li>
-                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> Logout</a>
+                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> خروج از سیستم
+                                 </a>
                             </li>
                         </ul>
                     </li>
@@ -151,7 +223,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             <h4>{{ ucwords(Auth::user()->name) }}</h4>
                             <p>{{ Auth::user()->email }}</p>
 
-                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary">Profile</a>
+                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary"> مشخصات كاربر </a>
                             <div style="clear:both"></div>
                         </div>
                     </div>
@@ -161,7 +233,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <li class="dropdown">
                             <a data-toggle="collapse" href="#tools-dropdown-element">
                                 <span class="icon voyager-tools"></span>
-                                <span class="title">Tools</span>
+                                <span class="title">ابزار</span>
                                 <span class="site-menu-arrow"></span>
                             </a>
 
@@ -171,13 +243,13 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                                         <li>
                                             <a href="/{{config('voyager.routes.prefix')}}/menus">
                                                 <span class="icon voyager-list"></span>
-                                                <span class="title">Menu Builder</span>
+                                                <span class="title">سازنده فهرست</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="animsition-link" href="{{ route('voyager.database') }}">
                                                 <span class="icon voyager-data"></span>
-                                                <span class="title">Database</span>
+                                                <span class="title">پایگاه داده</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -187,7 +259,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <li>
                             <a href="{{ route('voyager.settings') }}">
                                 <span class="icon voyager-settings"></span>
-                                <span class="title">Settings</span>
+                                <span class="title">تنظیمات</span>
                             </a>
                         </li>
                     </ul>
