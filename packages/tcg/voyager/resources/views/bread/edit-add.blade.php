@@ -73,6 +73,11 @@
                                             </button>
                                     @elseif($row->type == "select_dropdown")
                                         <?php $options = json_decode($row->details); ?>
+                                            {{--@if($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $data->{$row->field} == 0)--}}
+                                                {{--$options = --}}
+                                            {{--@elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $data->{$row->field} == 1)--}}
+                                                {{--نقدی--}}
+                                            {{--@endif--}}
                                         <?php $selected_value = (isset($dataTypeContent->{$row->field}) && !empty(old($row->field,
                                                         $dataTypeContent->{$row->field}))) ? old($row->field,
                                                 $dataTypeContent->{$row->field}) : old($row->field); ?>
