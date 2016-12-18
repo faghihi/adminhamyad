@@ -154,15 +154,7 @@
         table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
             text-align: right;
         }
-        table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
-            left: 4px;
-        }
-        table.dataTable {
-            direction: rtl;
-        }
-        table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
-            left: 4px;
-        }
+
     </style>
 </head>
 
