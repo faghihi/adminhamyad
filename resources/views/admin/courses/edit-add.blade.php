@@ -44,6 +44,20 @@
             overflow-x: hidden;
             min-height: 100%;
         }
+        .panel-bordered>.panel-heading>.panel-title {
+            text-align: right;
+        }
+        .panel-body>:last-child {
+            text-align: right;
+        }
+        .panel-title {
+            text-align: right;
+        }
+        .form-control {
+            direction: rtl;
+        }
+
+
     </style>
 @stop
 
@@ -63,8 +77,9 @@
                     <div class="panel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <i class="voyager-character"></i> Name
-                                <span class="panel-desc"> title for course</span>
+                                <i class="voyager-character"></i> نام
+                                <span class="panel-desc">عنوان دوره
+</span>
                             </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
@@ -78,7 +93,8 @@
                     <!-- ### CONTENT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-book"></i> description</h3>
+                            <h3 class="panel-title"><i class="icon wb-book"></i> تشریح
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-expand" data-toggle="panel-fullscreen" aria-hidden="true"></a>
                             </div>
@@ -91,7 +107,8 @@
                     <!-- ### EXCERPT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Tags</h3>
+                            <h3 class="panel-title">برچسب ها
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -125,14 +142,16 @@
                     <!-- ### DETAILS ### -->
                     <div class="panel panel panel-bordered panel-warning">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> Post Details</h3>
+                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> اطلاعات پست
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="name">Category</label>
+                                <label for="name">دسته بندی
+                                </label>
                                 <select class="form-control" name="category_id">
                                     @foreach(\App\Category::all() as $category)
                                     <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
@@ -145,7 +164,8 @@
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> Course Image</h3>
+                            <h3 class="panel-title"><i class="icon wb-image"></i> تصویر دوره
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -161,7 +181,8 @@
                     <!-- ### SEO CONTENT ### -->
                     <div class="panel panel-bordered panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-search"></i> SEO Content</h3>
+                            <h3 class="panel-title"><i class="icon wb-search"></i> محتوا جستجوگرها
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -185,7 +206,8 @@
             <!-- PUT Method if we are editing -->
 
             <button type="submit" class="btn btn-primary pull-right">
-                @if(isset($dataTypeContent->id)){{ 'Update Post' }}@else<?= '<i class="icon wb-plus-circle"></i> Create New Post'; ?>@endif
+                @if(isset($dataTypeContent->id)){{ 'به روز رسانی پست
+' }}@else<?= '<i class="icon wb-plus-circle"></i> Create New Post'; ?>@endif
             </button>
         </form>
 
@@ -202,3 +224,4 @@
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
 @stop
+
