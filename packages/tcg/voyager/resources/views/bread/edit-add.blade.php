@@ -128,17 +128,20 @@
 
                                 </div>
                             @endforeach
-
+                                {{--packs--}}
                                 @if($dataType->slug == "packs")
                                     @if(isset($dataTypeContent->id))
                                         <h3>courses</h3>
                                         @foreach($dataTypeContent->courses as $sec)
                                             {{$sec->id}}
                                             {{$sec->name}}
+                                            <button></button>
                                             <br>
                                         @endforeach
                                     @endif
                                 @endif
+
+
 
                         </div><!-- panel-body -->
 

@@ -36,8 +36,13 @@
                                 <tr>
                                     @foreach($dataType->browseRows as $row)
                                     <td>
+
                                         @if($row->type == 'image')
                                             <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+                                        @elseif($row->display_name == Config::get('settings.user'))
+                                            {{\App\NormalUser::find($data->{$row->field})->email }}
+                                        @elseif($row->display_name == Config::get('settings.course_name'))
+                                            {{\App\Course::find($data->{$row->field})->name }}
 
                                         @elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $data->{$row->field} == 0)
                                             درصد
@@ -48,8 +53,7 @@
                                             تایید نشده
                                         @elseif($row->display_name == Config::get('settings.enable') && $dataType->slug ==  'reviews' && $data->{$row->field} == 1)
                                             تایید شده
-                                        @elseif($row->display_name == Config::get('settings.user'))
-                                            {{\App\NormalUser::find($data->{$row->field})->email }}
+
                                         @elseif( in_array($row->display_name, Config::get('settings.prices_list')))
                                             @if($data->{$row->field} > 1000)
                                                 <?php $price=$data->{$row->field}/1000 . ' هزار تومان'?>
