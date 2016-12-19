@@ -145,16 +145,11 @@
 
                                                     <div class="modal-body">
                                                         <h4>New File/Folder Name</h4>
-<<<<<<< HEAD
                                                         <select id="new_courseName" class="form-control">
                                                             @foreach(App\Course::all() as $item)
                                                                 <option value="{{ $item->id }}">Name: {{ $item->name }}, id: {{ $item->id }}</option>
                                                             @endforeach
                                                     </select>
-=======
-                                                        <input id="new_filename" class="form-control" type="text"
-                                                               value="@{{selected_file.name}}">
->>>>>>> master
                                                     </div>
 
                                                     <div class="modal-footer">
@@ -437,7 +432,6 @@
             $('#add_course_modal').modal('show');
         });
 
-<<<<<<< HEAD
 
         $("#subscribe").click(function(){
             var url = $(this).attr("data-link");
@@ -473,8 +467,6 @@
             }); //end of ajax
         });
 
-=======
->>>>>>> master
     </script>
     <!-- Include our script files -->
     <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
