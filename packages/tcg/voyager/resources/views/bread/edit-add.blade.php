@@ -43,7 +43,6 @@
                             @foreach($dataType->addRows as $row)
                                 <div class="form-group">
                                     <label for="name">{{ $row->display_name }}</label>
-
                                     @if($row->type == "text")
                                         <input type="text" class="form-control" name="{{ $row->field }}"
                                                placeholder="{{ $row->display_name }}"
@@ -129,6 +128,17 @@
 
                                 </div>
                             @endforeach
+
+                                @if($dataType->slug == "packs")
+                                    @if(isset($dataTypeContent->id))
+                                        <h3>courses</h3>
+                                        @foreach($dataTypeContent->courses as $sec)
+                                            {{$sec->id}}
+                                            {{$sec->name}}
+                                            <br>
+                                        @endforeach
+                                    @endif
+                                @endif
 
                         </div><!-- panel-body -->
 
