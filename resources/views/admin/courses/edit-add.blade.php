@@ -44,6 +44,17 @@
             overflow-x: hidden;
             min-height: 100%;
         }
+
+        .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+
+            direction: rtl;
+        }
+        .nav-tabs>li>a {
+            direction: rtl;
+        }
+        .section:focus {
+            text-decoration: none;
+        }
     </style>
 @stop
 
@@ -102,23 +113,55 @@
                                 {{$tag->tag_name}}
                             @endforeach
                         </div>
-                        <div class="panel-body">
-                          <input class="form-control" name="excerpt" value="
+                        <div class="panel-body" >
+                            <input class="form-control" name="excerpt" value="
                               @if (isset($dataTypeContent->tags))
-                                  @foreach($dataTypeContent->tags as $tag)
-                                      {{$tag->tag_name}}
-                                  @endforeach
-                              @endif
-                                  ">
-                          </input>
+                            @foreach($dataTypeContent->tags as $tag)
+                            {{$tag->tag_name}}
+                            @endforeach
+                            @endif
+                                    ">
+                            </input>
+                            <br>
                       </div>
                     </div>
                     <div>
+
+
+
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
+                                        <span class="caret"></span>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body"><p>name</p><p>time</p></div>
+                                    <div class="panel-footer"><input type="button" value="edit1"> <input type="button" value="edit2"> </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
+                                        <span class="caret"></span>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body"><p>name</p><p>time</p></div>
+                                    <div class="panel-footer"><input type="button" value="edit1"> <input type="button" value="edit2"> </div>
+                                </div>
+                            </div>
+                        </div>
+
                         @foreach($dataTypeContent->section as $sec)
                             {{$sec->id}}
                             {{$sec->name}}
                             <br>
                         @endforeach
+                        <input type="button" class="btn btn-primary pull-right" value="Add">
                     </div>
                 </div>
                 <div class="col-md-4">
