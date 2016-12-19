@@ -168,7 +168,6 @@
                                             {{$sec->id}}
                                             {{$sec->name}}
                                             <br>
-                                            <!-- Rename File Modal -->
                                         @endforeach
                                     @endif
                                 @endif
