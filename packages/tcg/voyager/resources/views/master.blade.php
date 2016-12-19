@@ -43,6 +43,29 @@
     @yield('css')
     @yield('head')
     <style>
+
+
+        #container2{
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            padding-right: 15px;
+        }
+
+        html, body{
+            height: 99%;
+            overflow:hidden;
+        }
+
+        .app-container.expanded .content-container .navbar-top {
+            padding-right: 200px;
+        }
+        .flat-blue .side-menu.sidebar-inverse{
+            right: 0;
+            direction: rtl;
+        }
+
+
         .app-container.expanded .content-container .navbar-top {
             padding-right: 200px;
         }
@@ -113,11 +136,41 @@
             text-align: right;
             top:0;
         }
+
+        .app-container .content-container .side-menu:hover .navbar-nav li.dropdown > a:after {
+            left: 1em;
+            right:inherit;
+        }
+        .app-container .content-container .side-menu .navbar-nav li.dropdown > a:after {
+            left: 1em;
+            right:inherit;
+        }
+        .app-container .content-container .side-menu .navbar-nav li a {
+            padding: 10px 0 0 10px;
+        }
+        .nav {
+            padding-right: 0;
+        }
+        .page-title {
+            padding-right: 75px;
+            direction: rtl;
+        }
+        .page-title > i {
+            right: 25px;
+            margin-left: 10px;
+        }
+        .page-title .btn.btn-success {
+            right: 15px;
+        }
+        table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+            text-align: right;
+        }
+
     </style>
 </head>
 
 <body class="flat-blue">
-
+<div id="container2">
 <div id="voyager-loader">
     <img src="{{ config('voyager.assets_path') }}/images/logo-icon.png" alt="Voyager Loader">
 </div>
@@ -321,5 +374,8 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
     @endif
 </script>
 @yield('javascript')
+
+
+</div>
 </body>
 </html>
