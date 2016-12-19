@@ -155,7 +155,9 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="button" class="btn btn-warning" id="add_course"
-                                                                onclick="addCourse(event)">Add</button>
+                                                                onclick="addCourse(event)"
+                                                                data-link="{{ url('/admin/addCourseInModal') }}"  
+                                                                data-token="{{ csrf_token() }}">Add</button>
                                                     </div>
                                                 </div>
                                             </div>

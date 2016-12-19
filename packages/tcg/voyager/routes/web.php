@@ -78,4 +78,6 @@ Route::group(['middleware' => ['web', 'admin.user']], function () {
 
     Route::get('provider-courses/{id}',
         ['uses' => 'VoyagerBreadController@showall', 'as' => 'voyager.bread.showall']);
+    Route::get('addCourseInModal',
+        ['uses' => 'AjaxController@AddCourse', 'as' => 'voyager.bread.edit-add']);
 });
