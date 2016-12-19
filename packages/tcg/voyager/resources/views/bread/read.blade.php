@@ -32,6 +32,8 @@
                                     {{\App\NormalUser::find($dataTypeContent->{$row->field})->email }}
                                 @elseif($row->display_name == Config::get('settings.course_name'))
                                     {{\App\Course::find($dataTypeContent->{$row->field})->name }}
+                                @elseif($row->display_name == Config::get('settings.category'))
+                                    {{\App\Category::find($dataTypeContent->{$row->field})->name }}
                                 @elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $dataTypeContent->{$row->field} == 0)
                                    <p>درصد</p>
                                 @elseif($row->display_name == Config::get('settings.discount') && $dataType->slug ==  'discount' && $dataTypeContent->{$row->field} == 1)

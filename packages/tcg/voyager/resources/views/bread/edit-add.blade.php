@@ -130,13 +130,42 @@
                             @endforeach
                                 {{--packs--}}
                                 @if($dataType->slug == "packs")
+
                                     @if(isset($dataTypeContent->id))
                                         <h3>courses</h3>
+                                        <div class="modal fade modal-warning" id="add_course_modal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title"><i class="voyager-character"></i> Add Course</h4>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <h4>New File/Folder Name</h4>
+                                                        <input id="new_filename" class="form-control" type="text"
+                                                               value="@{{selected_file.name}}">
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        <button type="button" class="btn btn-warning" id="add_course"
+                                                                onclick="addCourse(event)">Add</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" id="addCourse"><i class="voyager-upload"></i>
+                                            Add
+                                        </button>
+                                    <br>
                                         @foreach($dataTypeContent->courses as $sec)
                                             {{$sec->id}}
                                             {{$sec->name}}
-                                            <button></button>
                                             <br>
+                                            <!-- Rename File Modal -->
                                         @endforeach
                                     @endif
                                 @endif
@@ -389,11 +418,20 @@
             }
 
         }
+        function addCourse(){
+
+        }
         $('#choose').click(function(){
-//            if(typeof(manager.selected_file) !== 'undefined'){
-//                $('#rename_file').val(manager.selected_file.name);
-//            }
             $('#choose_file_modal').modal('show');
         });
+
+        $('#addCourse').click(function(){
+            $('#add_course_modal').modal('show');
+        });
+
     </script>
+    <!-- Include our script files -->
+    <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
+    <script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>
+    <script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>
 @stop
