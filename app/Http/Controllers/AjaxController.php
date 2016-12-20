@@ -22,6 +22,7 @@ class AjaxController extends Controller
         catch ( \Illuminate\Database\QueryException $e){
             return response()->json(array('msg'=> 2), 200);
         }
+        return response()->json(array('msg'=> 3), 200);
 //        $sub=new Subscribe();
 //        $sub->email=$Email;
 //        try{

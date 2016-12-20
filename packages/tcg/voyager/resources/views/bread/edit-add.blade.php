@@ -176,7 +176,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="button" class="btn btn-warning" id="add_course"
-                                                                onclick="addc()"
+                                                                onclick="addc(event)"
                                                                 data-link="{{ url('/admin/addCourseInModal') }}"
                                                                 data-token="{{ csrf_token() }}">Add</button>
                                                     </div>
@@ -446,39 +446,42 @@
 
         function addc(){
             var conceptName = $('#new_courseName').find(":selected").val();
-            var packId = $('#packId').find(":selected").val();
+            var packId = $('#packId').text();
             var url = $(this).attr("data-link");
 
                 //add it to your data
                 var data = {
                     _token:$(this).data('token'),
                     conceptName : conceptName,
-                    packId : packId,
+                    packId : packId
                 };
-                $.ajax({
-                    url: url,
-                    type:"POST",
-                    data: data,
-                    success:function(data){
-                        // alert(data.msg);
-                        if(data.msg==1){
-                            $('#subform').hide('slow');
-                            $('#errorform').show('fast')
-                        }
-                        if(data.msg==2){
-                            $('#subform').hide('slow');
-                            $('#errorform1').show('fast')
-                        }
-                        if(data.msg==3){
-                            $('#subform').hide('slow');
-                            $('#successform').show('fast')
-                        }
+                console.log(packId);
+                console.log(url);
 
-                    },error:function(){
-                        $('#subform').hide('slow');
-                        $('#errorform2').show('fast')
-                    }
-                });
+//                $.ajax({
+//                    url: url,
+//                    type:"POST",
+//                    data: data,
+//                    success:function(data){
+//                        // alert(data.msg);
+//                        if(data.msg==1){
+////                            $('#subform').hide('slow');
+////                            $('#errorform').show('fast')
+//                            toastr.error('not possible', "Whoops!");
+//                        }
+//                        if(data.msg==2){
+//                            toastr.error('not possible', "Whoops!");
+//                        }
+//                        if(data.msg==3){
+//                            toastr.success('selected', "Sweet Success!");
+//                            $('#choose_file_modal').modal('hide');
+//                        }
+//
+//                    },error:function(){
+//                        $('#subform').hide('slow');
+//                        $('#errorform2').show('fast')
+//                    }
+//                });
         }
         $('#choose').click(function(){
             $('#choose_file_modal').modal('show');
@@ -487,42 +490,6 @@
         $('#addCourse').click(function(){
             $('#add_course_modal').modal('show');
         });
-
-
-        $("#subscribe").click(function(){
-            var url = $(this).attr("data-link");
-
-            //add it to your data
-            var data = {
-                _token:$(this).data('token'),
-                Email:$('#submail').val()
-            };
-            $.ajax({
-                url: url,
-                type:"POST",
-                data: data,
-                success:function(data){
-                    // alert(data.msg);
-                    if(data.msg==1){
-                        $('#subform').hide('slow');
-                        $('#errorform').show('fast')
-                    }
-                    if(data.msg==2){
-                        $('#subform').hide('slow');
-                        $('#errorform1').show('fast')
-                    }
-                    if(data.msg==3){
-                        $('#subform').hide('slow');
-                        $('#successform').show('fast')
-                    }
-
-                },error:function(){
-                    $('#subform').hide('slow');
-                    $('#errorform2').show('fast')
-                }
-            }); //end of ajax
-        });
-
     </script>
     <!-- Include our script files -->
     <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
