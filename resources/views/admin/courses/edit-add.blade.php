@@ -137,8 +137,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                       Collapsible Group 1
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="caret"></span></a>
+                                       {{$sec->name}}
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span></a>
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
@@ -148,8 +148,6 @@
                             </div>
                             @endforeach
                         </div>
-                            {{$sec->id}}
-                            {{$sec->name}}
                             <br>
                         <input type="button" class="btn btn-info pull-right" value="Add">
                     </div>
