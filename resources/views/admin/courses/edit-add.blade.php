@@ -133,11 +133,12 @@
                     </div>
                     <div>
                         <div class="panel-group" id="accordion">
+                            @foreach($dataTypeContent->section as $sec)
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Collapsible Group 1</a>
-                                        <span class="caret"></span>
+                                       Collapsible Group 1
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="caret"></span></a>
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
@@ -145,25 +146,11 @@
                                     <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-                                        <span class="caret"></span>
-                                    </h4>
-                                </div>
-                                <div id="collapse2" class="panel-collapse collapse">
-                                    <div class="panel-body"><p>name</p><p>time</p></div>
-                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit" > <input type="button" class="btn btn-success" value="browse" > </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-
-                        @foreach($dataTypeContent->section as $sec)
                             {{$sec->id}}
                             {{$sec->name}}
                             <br>
-                        @endforeach
                         <input type="button" class="btn btn-info pull-right" value="Add">
                     </div>
                 </div>

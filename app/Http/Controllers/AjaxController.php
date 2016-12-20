@@ -9,8 +9,8 @@ class AjaxController extends Controller
 {
     public function AddCourse()
     {
-        if(! isset($_REQUEST['conceptName']) || isset($_REQUEST['packId'])){
-//            return response()->json(array('msg'=>1), 200);
+        if(! isset($_REQUEST['conceptName']) ||!isset($_REQUEST['packId'])){
+            return response()->json(array('msg'=>1), 200);
         }
         $conceptName = $_REQUEST['conceptName'];
         $packId = $_REQUEST['packId'];

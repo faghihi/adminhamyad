@@ -132,7 +132,7 @@
                                 @if($dataType->slug == "packs")
 
                                     @if(isset($dataTypeContent->id))
-                                        <p type="hidden" id="packId">{{ $dataTypeContent->id }}</p>
+                                        <p hidden id="packId">{{ $dataTypeContent->id }}</p>
                                         <h3>courses</h3>
                                         <div class="modal fade modal-warning" id="add_course_modal">
                                             <div class="modal-dialog">
@@ -444,10 +444,11 @@
 
         }
 
-        function addc(){
+        function addc(e){
             var conceptName = $('#new_courseName').find(":selected").val();
             var packId = $('#packId').text();
-            var url = $(this).attr("data-link");
+            var t=e.target;
+            var url = $(t).attr('data-link');
 
                 //add it to your data
                 var data = {
@@ -458,30 +459,29 @@
                 console.log(packId);
                 console.log(url);
 
-//                $.ajax({
-//                    url: url,
-//                    type:"POST",
-//                    data: data,
-//                    success:function(data){
-//                        // alert(data.msg);
-//                        if(data.msg==1){
-////                            $('#subform').hide('slow');
-////                            $('#errorform').show('fast')
-//                            toastr.error('not possible', "Whoops!");
-//                        }
-//                        if(data.msg==2){
-//                            toastr.error('not possible', "Whoops!");
-//                        }
-//                        if(data.msg==3){
-//                            toastr.success('selected', "Sweet Success!");
-//                            $('#choose_file_modal').modal('hide');
-//                        }
-//
-//                    },error:function(){
-//                        $('#subform').hide('slow');
-//                        $('#errorform2').show('fast')
-//                    }
-//                });
+                $.ajax({
+                    url: url,
+                    type:"POST",
+                    data: data,
+                    success:function(data){
+                        // alert(data.msg);
+                        if(data.msg==1){
+//                            $('#subform').hide('slow');
+//                            $('#errorform').show('fast')
+                            toastr.error('not possible', "Whoops!");
+                        }
+                        if(data.msg==2){
+                            toastr.error('not possibllllle', "Whoops!");
+                        }
+                        if(data.msg==3){
+                            toastr.success('selected', "Sweet Success!");
+                            $('#add_course_modal').modal('hide');
+                        }
+
+                    },error:function(){
+                        toastr.error('not Connection', "Whoops!");
+                    }
+                });
         }
         $('#choose').click(function(){
             $('#choose_file_modal').modal('show');
