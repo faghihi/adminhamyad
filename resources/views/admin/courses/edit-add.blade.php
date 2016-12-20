@@ -141,7 +141,7 @@
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
-                                    <div class="panel-body"><p>اسم</p><p>زمان</p></div>
+                                    <div class="panel-body"><p>name</p><p>time</p></div>
                                     <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
                                 </div>
                             </div>

@@ -114,10 +114,10 @@
             margin-left: 10px;
         }
         .navbar .dropdown.profile .dropdown-menu h5 {
-           float: right;
+            float: right;
         }
         .navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h6 {
-             float: right;
+            float: right;
         }
         .flat-blue .app-footer {
             text-align: left;
@@ -171,117 +171,117 @@
 
 <body class="flat-blue">
 <div id="container2">
-<div id="voyager-loader">
-    <img src="{{ config('voyager.assets_path') }}/images/logo-icon.png" alt="Voyager Loader">
-</div>
+    <div id="voyager-loader">
+        <img src="{{ config('voyager.assets_path') }}/images/logo-icon.png" alt="Voyager Loader">
+    </div>
 
-<?php
-$user_avatar = Voyager::image(Auth::user()->avatar);
-if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->avatar, 0, 8) == 'https://')) {
-    $user_avatar = Auth::user()->avatar;
-}
-$menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1;
-?>
+    <?php
+    $user_avatar = Voyager::image(Auth::user()->avatar);
+    if ((substr(Auth::user()->avatar, 0, 7) == 'http://') || (substr(Auth::user()->avatar, 0, 8) == 'https://')) {
+        $user_avatar = Auth::user()->avatar;
+    }
+    $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1;
+    ?>
 
-<div class="app-container @if ($menuExpanded) expanded @endif ">
-    <div class="row content-container">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <div class="hamburger @if ($menuExpanded) is-active @endif ">
-                        <span class="hamburger-inner"></span>
-                    </div>
-
-                    <ol class="breadcrumb" style="direction: rtl">
-                        @if(count(Request::segments()) == 1)
-                            <li class="active"><i class="voyager-boat"></i>  میز کار </li>
-                        @else
-                            <li class="active">
-                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i>  میز کار </a>
-                            </li>
-                        @endif
-                        <?php $breadcrumb_url = ''; ?>
-                        @for($i = 1; $i <= count(Request::segments()); $i++)
-                            <?php $breadcrumb_url .= '/' . Request::segment($i); ?>
-                            @if(Request::segment($i) != config('voyager.routes.prefix') && !is_numeric(Request::segment($i)))
-
-                                @if($i < count(Request::segments()) & $i > 0)
-                                    <li class="active"><a
-                                                href="{{ $breadcrumb_url }}">{{ ucwords(str_replace('-', ' ', str_replace('_', ' ', Request::segment($i)))) }}</a>
-                                    </li>
-                                @else
-                                    <li>{{ ucwords(str_replace('-', ' ', str_replace('_', ' ', Request::segment($i)))) }}</li>
-                                @endif
-
-                            @endif
-                        @endfor
-                    </ol>
-
-
-                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
-                        <i class="voyager-list icon"></i>
-                    </button>
-                </div>
-                <ul class="nav navbar-nav navbar-left">
-                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
-                        <i class="voyager-x icon"></i>
-                    </button>
-
-
-                    <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><img src="{{ $user_avatar }}" class="profile-img"> <span
-                                    class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-animated">
-                            <li class="profile-img">
-                                <img src="{{ $user_avatar }}" class="profile-img">
-                                <div class="profile-body">
-                                    <h5>{{ Auth::user()->name }}</h5>
-                                    <h6>{{ Auth::user()->email }}</h6>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> مشخصات كاربر </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> خروج از سیستم
-                                 </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-
-        <div class="side-menu sidebar-inverse">
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="side-menu-container">
+    <div class="app-container @if ($menuExpanded) expanded @endif ">
+        <div class="row content-container">
+            <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+                <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="{{ route('voyager.dashboard') }}">
-                            <div class="icon voyager-helm"></div>
-                            <div class="title">{{Voyager::setting('admin_title')}}</div>
-                        </a>
-                        <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                        <div class="hamburger @if ($menuExpanded) is-active @endif ">
+                            <span class="hamburger-inner"></span>
+                        </div>
+
+                        <ol class="breadcrumb" style="direction: rtl">
+                            @if(count(Request::segments()) == 1)
+                                <li class="active"><i class="voyager-boat"></i>  میز کار </li>
+                            @else
+                                <li class="active">
+                                    <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i>  میز کار </a>
+                                </li>
+                            @endif
+                            <?php $breadcrumb_url = ''; ?>
+                            @for($i = 1; $i <= count(Request::segments()); $i++)
+                                <?php $breadcrumb_url .= '/' . Request::segment($i); ?>
+                                @if(Request::segment($i) != config('voyager.routes.prefix') && !is_numeric(Request::segment($i)))
+
+                                    @if($i < count(Request::segments()) & $i > 0)
+                                        <li class="active"><a
+                                                    href="{{ $breadcrumb_url }}">{{ ucwords(str_replace('-', ' ', str_replace('_', ' ', Request::segment($i)))) }}</a>
+                                        </li>
+                                    @else
+                                        <li>{{ ucwords(str_replace('-', ' ', str_replace('_', ' ', Request::segment($i)))) }}</li>
+                                    @endif
+
+                                @endif
+                            @endfor
+                        </ol>
+
+
+                        <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
+                            <i class="voyager-list icon"></i>
+                        </button>
+                    </div>
+                    <ul class="nav navbar-nav navbar-left">
+                        <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
                             <i class="voyager-x icon"></i>
                         </button>
-                    </div><!-- .navbar-header -->
 
-                    <div class="panel widget center bgimage"
-                         style="background-image:url({{ Voyager::image( Voyager::setting('admin_bg_image'), config('voyager.assets_path') . '/images/bg.jpg' ) }});">
-                        <div class="dimmer"></div>
-                        <div class="panel-content">
-                            <img src="{{ $user_avatar }}" class="avatar" alt="{{ Auth::user()->name }} avatar">
-                            <h4>{{ ucwords(Auth::user()->name) }}</h4>
-                            <p>{{ Auth::user()->email }}</p>
 
-                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary"> مشخصات كاربر </a>
-                            <div style="clear:both"></div>
+                        <li class="dropdown profile">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><img src="{{ $user_avatar }}" class="profile-img"> <span
+                                        class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-animated">
+                                <li class="profile-img">
+                                    <img src="{{ $user_avatar }}" class="profile-img">
+                                    <div class="profile-body">
+                                        <h5>{{ Auth::user()->name }}</h5>
+                                        <h6>{{ Auth::user()->email }}</h6>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> مشخصات كاربر </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> خروج از سیستم
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <div class="side-menu sidebar-inverse">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="side-menu-container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{{ route('voyager.dashboard') }}">
+                                <div class="icon voyager-helm"></div>
+                                <div class="title">{{Voyager::setting('admin_title')}}</div>
+                            </a>
+                            <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                                <i class="voyager-x icon"></i>
+                            </button>
+                        </div><!-- .navbar-header -->
+
+                        <div class="panel widget center bgimage"
+                             style="background-image:url({{ Voyager::image( Voyager::setting('admin_bg_image'), config('voyager.assets_path') . '/images/bg.jpg' ) }});">
+                            <div class="dimmer"></div>
+                            <div class="panel-content">
+                                <img src="{{ $user_avatar }}" class="avatar" alt="{{ Auth::user()->name }} avatar">
+                                <h4>{{ ucwords(Auth::user()->name) }}</h4>
+                                <p>{{ Auth::user()->email }}</p>
+
+                                <a href="{{ route('voyager.profile') }}" class="btn btn-primary"> مشخصات كاربر </a>
+                                <div style="clear:both"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <?= Menu::display('admin', 'admin_menu'); ?>
+                        <?= Menu::display('admin', 'admin_menu'); ?>
 
                         <li class="dropdown">
                             <a data-toggle="collapse" href="#tools-dropdown-element">
@@ -315,8 +315,8 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                                 <span class="title">تنظیمات</span>
                             </a>
                         </li>
-                    </ul>
-                    <!-- /.navbar-collapse -->
+                        </ul>
+                        <!-- /.navbar-collapse -->
                     </div>
                 </nav>
             </div>
