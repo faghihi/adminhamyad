@@ -42,135 +42,11 @@
 
     @yield('css')
     @yield('head')
-    <style>
 
-
-        #container2{
-            height: 100%;
-            width: 100%;
-            overflow: auto;
-            padding-right: 15px;
-        }
-
-        html, body{
-            height: 99%;
-            overflow:hidden;
-        }
-
-        .app-container.expanded .content-container .navbar-top {
-            padding-right: 200px;
-        }
-        .flat-blue .side-menu.sidebar-inverse{
-            right: 0;
-            direction: rtl;
-        }
-
-
-        .app-container.expanded .content-container .navbar-top {
-            padding-right: 200px;
-        }
-        .flat-blue .side-menu.sidebar-inverse{
-            right: 0;
-            direction: rtl;
-        }
-
-        .navbar-header {
-            float: right;
-        }
-        .hamburger {
-            float: right;
-        }
-        .container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-        .app-container .side-body {
-            margin-right: 45px;
-            margin-left: -15px;
-        }
-        .app-container.expanded .side-body {
-            margin-right: 235px;
-            margin-left:-15px;
-        }
-        .navbar {
-            padding-left: 0px;
-
-        }
-        .app-container.expanded .content-container .navbar-top {
-            padding-left: 0;
-        }
-        .breadcrumb > li + li:before {
-            content: '\e039';
-        }
-        .dropdown-menu>li>a {
-            text-align: right;
-        }
-        .dropdown-menu>li{
-            direction: rtl;
-        }
-        .navbar .dropdown.profile .dropdown-menu li.profile-img img.profile-img {
-            float: right;
-            margin-right: 0;
-            margin-left: 10px;
-        }
-        .navbar .dropdown.profile .dropdown-menu h5 {
-           float: right;
-        }
-        .navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h6 {
-             float: right;
-        }
-        .flat-blue .app-footer {
-            text-align: left;
-        }
-        .site-footer-right {
-            padding-left: 20px;
-        }
-        .app-container .side-menu:hover .panel.widget .avatar {
-            float: right;
-            margin-right: 10px;
-        }
-        .app-container .side-menu .panel.widget h4 {
-            float: right;
-            right: 66px;
-            left:0;
-            text-align: right;
-            top:0;
-        }
-
-        .app-container .content-container .side-menu:hover .navbar-nav li.dropdown > a:after {
-            left: 1em;
-            right:inherit;
-        }
-        .app-container .content-container .side-menu .navbar-nav li.dropdown > a:after {
-            left: 1em;
-            right:inherit;
-        }
-        .app-container .content-container .side-menu .navbar-nav li a {
-            padding: 10px 0 0 10px;
-        }
-        .nav {
-            padding-right: 0;
-        }
-        .page-title {
-            padding-right: 75px;
-            direction: rtl;
-        }
-        .page-title > i {
-            right: 25px;
-            margin-left: 10px;
-        }
-        .page-title .btn.btn-success {
-            right: 15px;
-        }
-        table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
-            text-align: right;
-        }
-
-    </style>
 </head>
 
 <body class="flat-blue">
-<div id="container2">
+
 <div id="voyager-loader">
     <img src="{{ config('voyager.assets_path') }}/images/logo-icon.png" alt="Voyager Loader">
 </div>
@@ -192,12 +68,12 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <span class="hamburger-inner"></span>
                     </div>
 
-                    <ol class="breadcrumb" style="direction: rtl">
+                    <ol class="breadcrumb">
                         @if(count(Request::segments()) == 1)
-                            <li class="active"><i class="voyager-boat"></i>  میز کار </li>
+                            <li class="active"><i class="voyager-boat"></i> Dashboard</li>
                         @else
                             <li class="active">
-                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i>  میز کار </a>
+                                <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> Dashboard</a>
                             </li>
                         @endif
                         <?php $breadcrumb_url = ''; ?>
@@ -218,12 +94,12 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                     </ol>
 
 
-                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="voyager-list icon"></i>
                     </button>
                 </div>
-                <ul class="nav navbar-nav navbar-left">
-                    <button type="button" class="navbar-left-expand-toggle pull-left visible-xs">
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="voyager-x icon"></i>
                     </button>
 
@@ -242,11 +118,10 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> مشخصات كاربر </a>
+                                <a href="{{ route('voyager.profile') }}"><i class="voyager-person"></i> Profile</a>
                             </li>
                             <li>
-                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> خروج از سیستم
-                                 </a>
+                                <a href="{{ route('voyager.logout') }}"><i class="voyager-power"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -276,7 +151,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                             <h4>{{ ucwords(Auth::user()->name) }}</h4>
                             <p>{{ Auth::user()->email }}</p>
 
-                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary"> مشخصات كاربر </a>
+                            <a href="{{ route('voyager.profile') }}" class="btn btn-primary">Profile</a>
                             <div style="clear:both"></div>
                         </div>
                     </div>
@@ -286,7 +161,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <li class="dropdown">
                             <a data-toggle="collapse" href="#tools-dropdown-element">
                                 <span class="icon voyager-tools"></span>
-                                <span class="title">ابزار</span>
+                                <span class="title">Tools</span>
                                 <span class="site-menu-arrow"></span>
                             </a>
 
@@ -296,13 +171,13 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                                         <li>
                                             <a href="/{{config('voyager.routes.prefix')}}/menus">
                                                 <span class="icon voyager-list"></span>
-                                                <span class="title">سازنده فهرست</span>
+                                                <span class="title">Menu Builder</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="animsition-link" href="{{ route('voyager.database') }}">
                                                 <span class="icon voyager-data"></span>
-                                                <span class="title">پایگاه داده</span>
+                                                <span class="title">Database</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -312,7 +187,7 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
                         <li>
                             <a href="{{ route('voyager.settings') }}">
                                 <span class="icon voyager-settings"></span>
-                                <span class="title">تنظیمات</span>
+                                <span class="title">Settings</span>
                             </a>
                         </li>
                     </ul>
@@ -374,8 +249,5 @@ $menuExpanded = isset($_COOKIE['expandedMenu']) && $_COOKIE['expandedMenu'] == 1
     @endif
 </script>
 @yield('javascript')
-
-
-</div>
 </body>
 </html>
