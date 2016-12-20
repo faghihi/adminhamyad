@@ -132,6 +132,7 @@
                                 @if($dataType->slug == "packs")
 
                                     @if(isset($dataTypeContent->id))
+                                        <p type="hidden" id="packId">{{ $dataTypeContent->id }}</p>
                                         <h3>courses</h3>
                                         <div class="modal fade modal-warning" id="add_course_modal">
                                             <div class="modal-dialog">
@@ -175,7 +176,7 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="button" class="btn btn-warning" id="add_course"
-                                                                onclick="addCourse(event)"
+                                                                onclick="addc()"
                                                                 data-link="{{ url('/admin/addCourseInModal') }}"
                                                                 data-token="{{ csrf_token() }}">Add</button>
                                                     </div>
@@ -442,8 +443,42 @@
             }
 
         }
-        function addCourse(){
 
+        function addc(){
+            var conceptName = $('#new_courseName').find(":selected").val();
+            var packId = $('#packId').find(":selected").val();
+            var url = $(this).attr("data-link");
+
+                //add it to your data
+                var data = {
+                    _token:$(this).data('token'),
+                    conceptName : conceptName,
+                    packId : packId,
+                };
+                $.ajax({
+                    url: url,
+                    type:"POST",
+                    data: data,
+                    success:function(data){
+                        // alert(data.msg);
+                        if(data.msg==1){
+                            $('#subform').hide('slow');
+                            $('#errorform').show('fast')
+                        }
+                        if(data.msg==2){
+                            $('#subform').hide('slow');
+                            $('#errorform1').show('fast')
+                        }
+                        if(data.msg==3){
+                            $('#subform').hide('slow');
+                            $('#successform').show('fast')
+                        }
+
+                    },error:function(){
+                        $('#subform').hide('slow');
+                        $('#errorform2').show('fast')
+                    }
+                });
         }
         $('#choose').click(function(){
             $('#choose_file_modal').modal('show');
