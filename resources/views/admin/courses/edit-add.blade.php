@@ -55,6 +55,12 @@
         .section:focus {
             text-decoration: none;
         }
+        a:focus {
+            text-decoration: none;
+        }
+        .panel-collapse {
+            direction: rtl;
+        }
     </style>
 @stop
 
@@ -123,12 +129,9 @@
                                     ">
                             </input>
                             <br>
-                      </div>
+                        </div>
                     </div>
                     <div>
-
-
-
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -138,8 +141,8 @@
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
-                                    <div class="panel-body"><p>name</p><p>time</p></div>
-                                    <div class="panel-footer"><input type="button" value="edit1"> <input type="button" value="edit2"> </div>
+                                    <div class="panel-body"><p>اسم</p><p>زمان</p></div>
+                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
@@ -151,7 +154,7 @@
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse">
                                     <div class="panel-body"><p>name</p><p>time</p></div>
-                                    <div class="panel-footer"><input type="button" value="edit1"> <input type="button" value="edit2"> </div>
+                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit" > <input type="button" class="btn btn-success" value="browse" > </div>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +164,7 @@
                             {{$sec->name}}
                             <br>
                         @endforeach
-                        <input type="button" class="btn btn-primary pull-right" value="Add">
+                        <input type="button" class="btn btn-info pull-right" value="Add">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -178,7 +181,7 @@
                                 <label for="name">Category</label>
                                 <select class="form-control" name="category_id">
                                     @foreach(\App\Category::all() as $category)
-                                    <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" @if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id){{ 'selected="selected"' }}@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -195,7 +198,7 @@
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                            <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
                         </div>
@@ -213,7 +216,7 @@
                             <div class="form-group">
                                 <label for="name">Price</label>
                                 <input class="form-control" name="meta_description">
-                                    @if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif
+                                @if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif
                                 </input>
                             </div>
                         </div>
@@ -223,9 +226,9 @@
 
             <!-- PUT Method if we are editing -->
             @if(isset($dataTypeContent->id))
-            <input type="hidden" name="_method" value="PUT">
-            @endif
-            <!-- PUT Method if we are editing -->
+                <input type="hidden" name="_method" value="PUT">
+        @endif
+        <!-- PUT Method if we are editing -->
 
             <button type="submit" class="btn btn-primary pull-right">
                 @if(isset($dataTypeContent->id)){{ 'Update Post' }}@else<?= '<i class="icon wb-plus-circle"></i> Create New Post'; ?>@endif
