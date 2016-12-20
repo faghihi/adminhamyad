@@ -144,19 +144,39 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <h4>New File/Folder Name</h4>
-                                                        <select id="new_courseName" class="form-control">
-                                                            @foreach(App\Course::all() as $item)
-                                                                <option value="{{ $item->id }}">Name: {{ $item->name }}, id: {{ $item->id }}</option>
-                                                            @endforeach
-                                                    </select>
+                                                        <?php
+                                                            $x = array();
+                                                            $ids=array();
+                                                             foreach ($dataTypeContent->courses as $c){
+                                                                 $ids[]=$c->id;
+                                                             }
+                                                            foreach (App\Course::all() as $item){
+                                                                if (! in_array($item->id, $ids)){
+                                                                    $x[] = $item;
+                                                                }
+                                                            }
+
+                                                        ?>
+                                                            @if(empty($x))
+                                                                تمامی دروس انتخاب شده است
+                                                            @else
+                                                        <h4>Add new course</h4>
+
+                                                                        <select id="new_courseName" class="form-control">
+                                                                            @foreach($x as $item)
+                                                                                <option value="{{ $item->id }}">Name: {{ $item->name }}, id: {{ $item->id }}</option>
+                                                                                {{--<option >{{ $item }}</option>--}}
+                                                                            @endforeach
+                                                                        @endif
+
+                                                        </select>
                                                     </div>
 
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                         <button type="button" class="btn btn-warning" id="add_course"
                                                                 onclick="addCourse(event)"
-                                                                data-link="{{ url('/admin/addCourseInModal') }}"  
+                                                                data-link="{{ url('/admin/addCourseInModal') }}"
                                                                 data-token="{{ csrf_token() }}">Add</button>
                                                     </div>
                                                 </div>
