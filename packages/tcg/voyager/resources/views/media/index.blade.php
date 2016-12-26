@@ -13,7 +13,7 @@
             <div class="col-md-12">
 
                 <div class="admin-section-title">
-                    <h3 style="direction: rtl;margin-top: 40px;"><i class="voyager-images" style="float: right;margin-left: 5px"></i> Media</h3>
+                    <h3 style="direction: rtl;margin-top: 40px;"><i class="voyager-images" style="float: right;margin-left: 5px"></i> فایل</h3>
                 </div>
                 <div class="clear"></div>
 
@@ -21,25 +21,26 @@
 
                     <div id="toolbar" style="direction: rtl">
                         <div class="btn-group offset-right">
-                            <button type="button" class="btn btn-primary" id="upload"><i class="voyager-upload"></i>
-                                Upload
-                            </button>
+                            <button type="button" class="btn btn-primary" id="upload">
+                                باگذاری
+                                <i class="voyager-upload"></i></button>
                             <button type="button" class="btn btn-primary" id="new_folder"
-                                    onclick="jQuery('#new_folder_modal').modal('show');"><i class="voyager-folder"></i>
-                                Add folder
-                            </button>
+                                    onclick="jQuery('#new_folder_modal').modal('show');">
+                                افزودن فایل
+                                <i class="voyager-folder"></i></button>
                         </div>
                         <button type="button" class="btn btn-default" id="refresh"><i class="voyager-refresh"></i>
                         </button>
                         <div class="btn-group offset-right">
-                            <button type="button" class="btn btn-default" id="move"><i class="voyager-move"></i> Move
-                            </button>
-                            <button type="button" class="btn btn-default" id="rename"><i class="voyager-character"></i>
-                                Rename
-                            </button>
-                            <button type="button" class="btn btn-default" id="delete"><i class="voyager-trash"></i>
-                                Delete
-                            </button>
+                            <button type="button" class="btn btn-default" id="move">
+                                حرکت
+                                <i class="voyager-move"></i></button>
+                            <button type="button" class="btn btn-default" id="rename">
+                                تغییر نام
+                                <i class="voyager-character"></i></button>
+                            <button type="button" class="btn btn-default" id="delete">
+                                حذف
+                                <i class="voyager-trash"></i></button>
                         </div>
                     </div>
 
@@ -54,15 +55,15 @@
 
                         <div class="breadcrumb-container">
                             <ol class="breadcrumb filemanager">
-                                <li data-folder="/" data-index="0"><span class="arrow"></span><strong>Media
-                                        Library</strong></li>
+                                <li data-folder="/" data-index="0"><span class="arrow"></span><strong>
+                                        محل فایل ها</strong></li>
                                 <template v-for="folder in folders">
                                     <li data-folder="@{{folder}}" data-index="@{{ $index+1 }}"><span
                                                 class="arrow"></span>@{{ folder }}</li>
                                 </template>
                             </ol>
 
-                            <div class="toggle"><span>Close</span><i class="voyager-double-right"></i></div>
+                            <div class="toggle"><span>بستن</span><i class="voyager-double-right"></i></div>
                         </div>
                         <div class="flex">
 
@@ -115,7 +116,7 @@
                                 </div>
 
                                 <div id="no_files">
-                                    <h3><i class="voyager-meh"></i> No files in this folder.</h3>
+                                    <h3>. هیچ فایلی در این پوشه نیست<i class="voyager-meh"></i></h3>
                                 </div>
 
                             </div>
