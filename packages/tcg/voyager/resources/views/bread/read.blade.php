@@ -1,5 +1,13 @@
 @extends('voyager::master')
 
+@section('css')
+    <style type="text/css">
+        body{
+            direction: rtl;
+        }
+    </style>
+@stop
+
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> Viewing {{ ucfirst($dataType->display_name_singular) }}
