@@ -1,6 +1,12 @@
 @extends('voyager::master')
 
 @section('css')
+    <link href="{{ config('voyager.assets_path') }}/ExtraLib/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="{{ config('voyager.assets_path') }}/ExtraLib/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="{{ config('voyager.assets_path') }}/ExtraLib/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <style>
         .panel .mce-panel {
             border-left-color: #fff;
@@ -61,6 +67,9 @@
         .panel-collapse {
             direction: rtl;
         }
+        .panel-body {
+            direction: rtl;
+        }
     </style>
 @stop
 
@@ -108,7 +117,8 @@
                     <!-- ### EXCERPT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Tags</h3>
+                            <h3 class="panel-title">برچسب ها
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -117,19 +127,33 @@
                             @foreach(\App\Tag::all() as $tag)
                                 {{$tag->id}}
                                 {{$tag->tag_name}}
+                                /
                             @endforeach
+
                         </div>
-                        <div class="panel-body" >
-                            <input class="form-control" name="excerpt" value="
-                              @if (isset($dataTypeContent->tags))
-                            @foreach($dataTypeContent->tags as $tag)
-                            {{$tag->tag_name}}
+                        <?php $tagss=\App\Tag::all();?>
+
+                        <form>
+                            <input name="tags" id="singleFieldTags2">
+                        </form>
+                        <script> var fruits = [];</script>
+                        @if (isset($tagss))
+                            @foreach(\App\Tag::all() as $tag)
+                                <script>
+                                    fruits.push("{{$tag->tag_name}}");
+                                </script>
                             @endforeach
-                            @endif
-                                    ">
-                            </input>
-                            <br>
-                        </div>
+                        @endif
+                        <script>
+                            $(function(){
+                                $('#singleFieldTags2').tagit({
+                                    availableTags: fruits
+                                });
+                            });
+                        </script>
+
+                        <br>
+
                     </div>
                     <div>
                         <div class="panel-group" id="accordion">
@@ -138,10 +162,10 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                        {{$sec->name}}
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span></a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{$sec->id}}" style="float: left;"><span class="caret"></span></a>
                                     </h4>
                                 </div>
-                                <div id="collapse1" class="panel-collapse collapse in">
+                                <div id="collapse{{$sec->id}}" class="panel-collapse collapse in">
                                     <div class="panel-body"><p>name</p><p>time</p></div>
                                     <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
                                 </div>

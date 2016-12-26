@@ -68,7 +68,7 @@
                                     @endforeach
                                     <td class="no-sort no-click">
                                         @if($dataType->slug == 'providers')
-                                            <a href="{{ route('voyager.bread.showall', $data->id) }}" class="btn-sm btn-warning pull-right">
+                                            <a href="{{ route('voyager.bread.showall', $data->id) }}" class="btn-sm btn-success pull-right" style="margin-left: 7px">
                                                 <i class="voyager-eye"></i> Show All
                                             </a>
                                         @endif

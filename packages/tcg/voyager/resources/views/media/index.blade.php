@@ -13,13 +13,13 @@
             <div class="col-md-12">
 
                 <div class="admin-section-title">
-                    <h3><i class="voyager-images"></i> Media</h3>
+                    <h3 style="direction: rtl;margin-top: 40px;"><i class="voyager-images" style="float: right;margin-left: 5px"></i> Media</h3>
                 </div>
                 <div class="clear"></div>
 
-                <div id="filemanager">
+                <div id="filemanager" style="top: 25px">
 
-                    <div id="toolbar">
+                    <div id="toolbar" style="direction: rtl">
                         <div class="btn-group offset-right">
                             <button type="button" class="btn btn-primary" id="upload"><i class="voyager-upload"></i>
                                 Upload
