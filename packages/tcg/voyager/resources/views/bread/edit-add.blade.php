@@ -47,22 +47,39 @@
 
                             @foreach($dataType->addRows as $row)
                                 <div class="form-group">
-                                    <label for="name">{{ $row->display_name }}</label>
+                                    <label for="name">{{ $row->display_name }} :</label>
                                     @if($row->type == "text")
-                                        <input type="text" class="form-control" name="{{ $row->field }}"
+                                        @if($row->display_name == Config::get('settings.course_name') && $dataType->slug ==  'sections')
+                                            <input  type="hidden" class="form-control" name="{{ $row->field }}"
+                                                   placeholder="{{ $row->display_name }}" id="course_name"
+                                                   {{--pattern="[0-9]*"--}}
+                                                   value="@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif">
+                                            <span id="coursenametyped">
+                                               @if(isset($dataTypeContent->id))
+                                                    {{$dataTypeContent->courses->name}}
+                                                @endif
+                                           </span>
+                                            <button type="button" class="btn btn-default" id="chooseCourse"><i class="voyager-character"></i>
+                                                انتخاب درس
+                                            </button>
+
+                                            @include('selectcourse')
+                                        @else
+                                         <input type="text" class="form-control" name="{{ $row->field }}"
                                                placeholder="{{ $row->display_name }}"
                                                value="@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif">
-                                    {{--@elseif($row->type == "password")--}}
-                                        {{--@if(isset($dataTypeContent->{$row->field}))--}}
-                                            {{--<br>--}}
-                                            {{--<small>Leave empty to keep the same</small>--}}
-                                        {{--@endif--}}
-                                        {{--<input type="password" class="form-control" name="{{ $row->field }}" value="">--}}
-                                    {{--@elseif($row->type == "text_area")--}}
-                                        {{--<textarea class="form-control"--}}
-                                                  {{--name="{{ $row->field }}">@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif</textarea>--}}
-                                    {{--@elseif($row->type == "rich_text_box")--}}
-                                        {{--<textarea class="form-control richTextBox" name="{{ $row->field }}">@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif</textarea>--}}
+                                        @endif
+                                    @elseif($row->type == "password")
+                                        @if(isset($dataTypeContent->{$row->field}))
+                                            <br>
+                                            <small>Leave empty to keep the same</small>
+                                        @endif
+                                        <input type="password" class="form-control" name="{{ $row->field }}" value="">
+                                    @elseif($row->type == "text_area")
+                                        <textarea class="form-control"
+                                                  name="{{ $row->field }}">@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif</textarea>
+                                    @elseif($row->type == "rich_text_box")
+                                        <textarea class="form-control richTextBox" name="{{ $row->field }}">@if(isset($dataTypeContent->{$row->field})){{ old($row->field, $dataTypeContent->{$row->field}) }}@else{{old($row->field)}}@endif</textarea>
                                     @elseif($row->type == "image" || $row->type == "file")
                                         @if($row->type == "image" && isset($dataTypeContent->{$row->field}))
                                             <img src="{{ Voyager::image( $dataTypeContent->{$row->field} ) }}"
@@ -289,6 +306,15 @@
             }
 
         }
+        function choosecourse(e) {
+            var conceptid = $('#CourseName').find(":selected").val();
+            var conceptName = $('#CourseName').find(":selected").text();
+            $('#course_name').val(conceptid);
+            $('#coursenametyped').text(conceptName);
+            console
+            toastr.success('selected', "Sweet Success!");
+            $('#choose_course_modal').modal('hide');
+        }
 
         function addc(e){
             var conceptName = $('#new_courseName').find(":selected").val();
@@ -331,6 +357,9 @@
         }
         $('#choose').click(function(){
             $('#choose_file_modal').modal('show');
+        });
+        $('#chooseCourse').click(function(){
+            $('#choose_course_modal').modal('show');
         });
 //
         $('#addCourse').click(function(){
