@@ -278,7 +278,8 @@ a:hover {
 .app-container .content-container .side-menu .navbar-nav .panel-collapse.in {
   display: none; }
 .app-container .content-container .side-menu:hover {
-  width: 250px; }
+  width: 19%; }
+
 .app-container .content-container .side-menu:hover .navbar-header .navbar-brand .title {
   display: inline-block; }
 .app-container .content-container .side-menu:hover .navbar-nav li a .title {
@@ -305,7 +306,7 @@ a:hover {
   padding-left: 250px; }
 
 .app-container.expanded .content-container .side-menu {
-  width: 250px; }
+  width: 19%; }
 .app-container.expanded .content-container .side-menu .navbar-header .navbar-brand .title {
   display: inline-block; }
 .app-container.expanded .content-container .side-menu .navbar-nav li a .title {

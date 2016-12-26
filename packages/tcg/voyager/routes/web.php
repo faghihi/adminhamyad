@@ -75,7 +75,9 @@ Route::group(['middleware' => ['web', 'admin.user']], function () {
     Route::put('database/{id}/edit-bread', 'VoyagerDatabaseController@updateBread');
     Route::delete('database/delete_bread/{id}',
         ['uses' => 'VoyagerDatabaseController@deleteBread', 'as' => 'voyager.database.delete_bread']);
-
+    Route::get('provider-courses',function (){
+        return redirect('/admin/providers');
+    });
     Route::get('provider-courses/{id}',
         ['uses' => 'VoyagerBreadController@showall', 'as' => 'voyager.bread.showall']);
     Route::post('addCourseInModal',

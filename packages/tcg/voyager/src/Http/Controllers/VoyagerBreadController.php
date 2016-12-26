@@ -389,6 +389,6 @@ class VoyagerBreadController extends Controller
 //            echo "<div><p>".$course['name']."</p><a href=\"".$course['editlink']."\">editlink</a><br><a href=\"".$course['showlink']."\">showlink</a>";
 //            echo '<br>';
 //        }
-        return view('testing');
+        return view('showallcourses')->with(['courses'=>$courses,'provider'=>$provider]);
     }
 }
