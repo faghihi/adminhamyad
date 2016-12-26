@@ -134,10 +134,15 @@
                         <?php $tagss=\App\Tag::all();?>
 
                         <form>
-                            <input name="tags" id="singleFieldTags2">
+                            <input name="tags" id="singleFieldTags2" value="
+                            @if (isset($tagss))
+                            @foreach($dataTypeContent->tags as $tag)
+                            {{$tag->tag_name}}
+                                    , @endforeach
+                            @endif">
                         </form>
                         <script> var fruits = [];</script>
-                        @if (isset($tagss))
+                        @if(isset($tagss))
                             @foreach(\App\Tag::all() as $tag)
                                 <script>
                                     fruits.push("{{$tag->tag_name}}");
