@@ -78,8 +78,13 @@ Route::group(['middleware' => ['web', 'admin.user']], function () {
     Route::get('provider-courses',function (){
         return redirect('/admin/providers');
     });
+    Route::get('participation',function (){
+        return redirect('/admin/courses');
+    });
     Route::get('provider-courses/{id}',
         ['uses' => 'VoyagerBreadController@showall', 'as' => 'voyager.bread.showall']);
+    Route::get('participation/{id}',
+        ['uses' => 'VoyagerBreadController@participation', 'as' => 'voyager.bread.participation']);
     Route::post('addCourseInModal',
         ['uses' => '\App\Http\Controllers\AjaxController@AddCourse', 'as' => 'voyager.bread.edit-add']);
     Route::get('addCourseInModal',
