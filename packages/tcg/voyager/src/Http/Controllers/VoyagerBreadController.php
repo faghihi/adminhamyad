@@ -381,30 +381,12 @@ class VoyagerBreadController extends Controller
         $provider = Provider::findorfail($id);
 
         $courses=$provider->courses;
-//        return $provider;
-//        foreach ($courses as $course) {
-//            $course['editlink']='/admin/courses/'.$course['id'].'/edit';
-//            $course['showlink']='/admin/courses/'.$course['id'];
-//        }
-//        foreach ($courses as $course){
-//            echo "<div><p>".$course['name']."</p><a href=\"".$course['editlink']."\">editlink</a><br><a href=\"".$course['showlink']."\">showlink</a>";
-//            echo '<br>';
-//        }
         return view('showallcourses')->with(['courses'=>$courses,'provider'=>$provider]);
     }
 
     public function participation($id)
     {
         $course=Course::findorfail($id);
-//        return $provider;
-//        foreach ($courses as $course) {
-//            $course['editlink']='/admin/courses/'.$course['id'].'/edit';
-//            $course['showlink']='/admin/courses/'.$course['id'];
-//        }
-//        foreach ($courses as $course){
-//            echo "<div><p>".$course['name']."</p><a href=\"".$course['editlink']."\">editlink</a><br><a href=\"".$course['showlink']."\">showlink</a>";
-//            echo '<br>';
-//        }
         return view('showstudents');
     }
 }

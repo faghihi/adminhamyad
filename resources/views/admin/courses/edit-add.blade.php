@@ -135,7 +135,7 @@
 
                         <form>
                             <input name="tags" id="singleFieldTags2" value="
-                            @if (isset($tagss))
+                            @if (isset($dataTypeContent->tags))
                             @foreach($dataTypeContent->tags as $tag)
                             {{$tag->tag_name}}
                                     , @endforeach
@@ -162,6 +162,7 @@
                     </div>
                     <div>
                         <div class="panel-group" id="accordion">
+                            @if(isset($dataTypeContent->id))
                             @foreach($dataTypeContent->section as $sec)
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -171,14 +172,21 @@
                                     </h4>
                                 </div>
                                 <div id="collapse{{$sec->id}}" class="panel-collapse collapse in">
-                                    <div class="panel-body"><p>name</p><p>time</p></div>
-                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
+                                    <div class="panel-body"><p>{{$sec['time']}} دقیقه</p>
+                                        <p>قسمت {{$sec['part']}}</p>
+                                    </div>
+                                    <div class="panel-footer"><a href="{{url('/admin/sections/'.$sec->id.'/edit')}}"><input type="button" class="btn btn-primary" value="edit"></a><a href="{{url('/admin/sections/'.$sec->id)}}"> <input type="button" class="btn btn-success" value="browse"></a></div>
                                 </div>
                             </div>
                             @endforeach
+                                @endif
                         </div>
                             <br>
-                        <input type="button" class="btn btn-info pull-right" value="Add">
+                        @if(isset($dataTypeContent->id))
+                      <a href="{{url('/admin/sections/create')}}"><button type="button" class="btn btn-primary" id="addSection"><i class="voyager-new"></i>
+                            افزودن
+                        </button></a>
+                            @endif
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -241,6 +249,7 @@
                 <input type="hidden" name="_method" value="PUT">
         @endif
         <!-- PUT Method if we are editing -->
+            <div id="courseId" hidden> @if(isset($dataTypeContent->id)){{$dataTypeContent->id}}@endif</div>
 
             <button type="submit" class="btn btn-primary pull-right">
                 @if(isset($dataTypeContent->id)){{ 'Update Post' }}@else<?= '<i class="icon wb-plus-circle"></i> Create New Post'; ?>@endif
@@ -254,9 +263,59 @@
             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
         </form>
     </div>
+
+
+{{--    @include('addsectionmodal',array('dataTypeContent'=>$dataTypeContent));--}}
 @stop
 
 @section('javascript')
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
+    {{--<script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>--}}
+    {{--<script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>--}}
+    {{--<script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>--}}
+    {{--<script type="text/javascript">--}}
+        {{--function addsection(e){--}}
+            {{--var conceptName = $('#new_sectionName').find(":selected").val();--}}
+            {{--var CourseId = $('#courseId').text();--}}
+            {{--var t=e.target;--}}
+            {{--var url = $(t).attr('data-link');--}}
+
+            {{--//add it to your data--}}
+            {{--var data = {--}}
+                {{--_token:$(this).data('token'),--}}
+                {{--conceptName : conceptName,--}}
+                {{--courseId : CourseId--}}
+            {{--};--}}
+            {{--console.log(CourseId);--}}
+            {{--console.log(url);--}}
+            {{--console.log(conceptName);--}}
+
+            {{--$.ajax({--}}
+                {{--url: url,--}}
+                {{--type:"POST",--}}
+                {{--data: data,--}}
+                {{--success:function(data){--}}
+                    {{--// alert(data.msg);--}}
+                    {{--if(data.msg==1){--}}
+                        {{--toastr.error('not possible', "Whoops!");--}}
+                    {{--}--}}
+                    {{--if(data.msg==2){--}}
+                        {{--toastr.error('not possibllllle', "Whoops!");--}}
+                    {{--}--}}
+                    {{--if(data.msg==3){--}}
+                        {{--toastr.success('selected', "Sweet Success!");--}}
+                        {{--$('#add_course_modal').modal('hide');--}}
+                    {{--}--}}
+
+                {{--},error:function(){--}}
+                    {{--toastr.error('not Connection', "Whoops!");--}}
+                {{--}--}}
+            {{--});--}}
+        {{--}--}}
+        {{--$('#addSection').click(function(){--}}
+            {{--$('#add_section_modal').modal('show');--}}
+        {{--});--}}
+    {{--</script>--}}
 @stop
+
