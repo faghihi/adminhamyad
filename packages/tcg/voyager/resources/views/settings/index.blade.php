@@ -2,6 +2,13 @@
 
 @section('css')
     <style>
+        .panel-actions {
+            left: 30px;
+        }
+        .panel-body{
+            direction: rtl;
+        }
+
         .panel-actions .voyager-trash {
             cursor: pointer;
         }
@@ -182,7 +189,7 @@
                 @foreach($settings as $setting)
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            {{ $setting->display_name }}<code>Voyager::setting('{{ $setting->key }}')</code>
+                            <code>Voyager::setting('{{ $setting->key }}')</code>{{ $setting->display_name }}
                         </h3>
                         <div class="panel-actions">
                             <a href="{{ route('voyager.settings.move_up', $setting->id) }}">

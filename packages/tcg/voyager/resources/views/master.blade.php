@@ -44,6 +44,44 @@
     @yield('head')
     <style>
 
+        #style-10::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+            border-radius: 10px;
+        }
+
+        #style-10::-webkit-scrollbar
+        {
+            width: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #style-10::-webkit-scrollbar-thumb
+        {
+            background-color: #AAA;
+            border-radius: 10px;
+            background-image: -webkit-linear-gradient(90deg,
+            rgba(0, 0, 0, .2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(0, 0, 0, .2) 50%,
+            rgba(0, 0, 0, .2) 75%,
+            transparent 75%,
+            transparent)
+        }
+        .flat-blue .side-menu.sidebar-inverse {
+            overflow-y: hidden;
+        }
+        .flat-blue .side-menu.sidebar-inverse:hover {
+            overflow-y: auto;
+        }
+        .app-container .content-container .side-menu {
+            width: 44px;
+        }
+        .app-container  .side-menu .panel.widget .avatar{
+            float: right;
+        }
 
         #container2{
             height: 100%;
@@ -255,7 +293,7 @@
             </nav>
 
 
-            <div class="side-menu sidebar-inverse">
+            <div class="side-menu sidebar-inverse" id="style-10">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="side-menu-container">
                         <div class="navbar-header">
