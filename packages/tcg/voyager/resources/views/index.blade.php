@@ -13,9 +13,9 @@
                 <div class="panel-content">
                     <i class="voyager-group"></i>
                     <?php $user_count = TCG\Voyager\Models\User::count(); ?>
-                    <h4>{{ $user_count }} Users</h4>
-                    <p>You have {{ $user_count }} active users registered. Click on 'View All Users' to view all your current users.</p>
-                    <a href="/{{ config('voyager.routes.prefix') }}/users" class="btn btn-primary">View All Users</a>
+                    <h4 style="direction: rtl !important;"> {{ $user_count }} کاربر  </h4>
+
+                    <a href="/{{ config('voyager.routes.prefix') }}/users" class="btn btn-primary">مشاهده تمام کاربران</a>
                 </div>
             </div>
             <?php } ?>
@@ -24,10 +24,10 @@
                 <div class="dimmer"></div>
                 <div class="panel-content">
                     <i class="voyager-news"></i>
-                    <?php $post_count = TCG\Voyager\Models\Post::count(); ?>
-                    <h4>{{ $post_count }} Post(s)</h4>
-                    <p>You have {{ $post_count }} Posts in your database. Click on 'View All Posts' below to view all posts.</p>
-                    <a href="/{{ config('voyager.routes.prefix') }}/posts" class="btn btn-primary">View All Posts</a>
+                    <?php $course_count = \App\Course::count(); ?>
+                    <h4 style="direction: rtl !important;"> {{ $course_count }} دوره </h4>
+
+                    <a href="/{{ config('voyager.routes.prefix') }}/courses" class="btn btn-primary">مشاهده تمام دوره ها</a>
                 </div>
             </div>
             <?php } ?>
@@ -37,9 +37,9 @@
                 <div class="panel-content">
                     <i class="voyager-file-text"></i>
                     <?php $page_count = TCG\Voyager\Models\Page::count(); ?>
-                    <h4>{{ $page_count }} Page(s)</h4>
-                    <p>You have {{ $page_count }} Pages in your database. Click on 'View All Pages' below to view all pages.</p>
-                    <a href="/{{ config('voyager.routes.prefix') }}/pages" class="btn btn-primary">View All Pages</a>
+                    <h4 style="direction: rtl !important;"> {{ $page_count }} اشتراک </h4>
+
+                    <a href="/{{ config('voyager.routes.prefix') }}/packs" class="btn btn-primary">مشاهده تمام اشتراک ها</a>
                 </div>
             </div>
             <?php } ?>
@@ -197,7 +197,7 @@
                         clearTimeout(timeout);
                         timeout = setTimeout(function () {
                             element.className =
-                                    element.className.replace(/ is-(increasing|decreasing)/g, '');
+                                element.className.replace(/ is-(increasing|decreasing)/g, '');
                         }, 3000);
                     });
                 });
@@ -210,7 +210,7 @@
                 var viewSelector = new gapi.analytics.ext.ViewSelector2({
                     container: 'view-selector-container'
                 })
-                        .execute();
+                    .execute();
 
 
                 /**
@@ -257,9 +257,9 @@
                         'dimensions': 'ga:date,ga:nthDay',
                         'metrics': 'ga:users',
                         'start-date': moment(now).subtract(1, 'day').day(0).subtract(1, 'week')
-                                .format('YYYY-MM-DD'),
+                            .format('YYYY-MM-DD'),
                         'end-date': moment(now).subtract(1, 'day').day(6).subtract(1, 'week')
-                                .format('YYYY-MM-DD')
+                            .format('YYYY-MM-DD')
                     });
 
                     Promise.all([thisWeek, lastWeek]).then(function (results) {
@@ -329,9 +329,9 @@
                         'dimensions': 'ga:month,ga:nthMonth',
                         'metrics': 'ga:users',
                         'start-date': moment(now).subtract(1, 'year').date(1).month(0)
-                                .format('YYYY-MM-DD'),
+                            .format('YYYY-MM-DD'),
                         'end-date': moment(now).date(1).month(0).subtract(1, 'day')
-                                .format('YYYY-MM-DD')
+                            .format('YYYY-MM-DD')
                     });
 
                     Promise.all([thisYear, lastYear]).then(function (results) {
@@ -372,9 +372,9 @@
                         new Chart(makeCanvas('chart-2-container')).Bar(data);
                         generateLegend('legend-2-container', data.datasets);
                     })
-                            .catch(function (err) {
-                                console.error(err.stack);
-                            });
+                        .catch(function (err) {
+                            console.error(err.stack);
+                        });
                 }
 
 
@@ -391,18 +391,18 @@
                         'sort': '-ga:pageviews',
                         'max-results': 5
                     })
-                            .then(function (response) {
+                        .then(function (response) {
 
-                                var data = [];
-                                var colors = ['#4D5360', '#949FB1', '#D4CCC5', '#E2EAE9', '#F7464A'];
+                            var data = [];
+                            var colors = ['#4D5360', '#949FB1', '#D4CCC5', '#E2EAE9', '#F7464A'];
 
-                                response.rows.forEach(function (row, i) {
-                                    data.push({value: +row[1], color: colors[i], label: row[0]});
-                                });
-
-                                new Chart(makeCanvas('chart-3-container')).Doughnut(data);
-                                generateLegend('legend-3-container', data);
+                            response.rows.forEach(function (row, i) {
+                                data.push({value: +row[1], color: colors[i], label: row[0]});
                             });
+
+                            new Chart(makeCanvas('chart-3-container')).Doughnut(data);
+                            generateLegend('legend-3-container', data);
+                        });
                 }
 
 
@@ -419,22 +419,22 @@
                         'sort': '-ga:sessions',
                         'max-results': 5
                     })
-                            .then(function (response) {
+                        .then(function (response) {
 
-                                var data = [];
-                                var colors = ['#4D5360', '#949FB1', '#D4CCC5', '#E2EAE9', '#F7464A'];
+                            var data = [];
+                            var colors = ['#4D5360', '#949FB1', '#D4CCC5', '#E2EAE9', '#F7464A'];
 
-                                response.rows.forEach(function (row, i) {
-                                    data.push({
-                                        label: row[0],
-                                        value: +row[1],
-                                        color: colors[i]
-                                    });
+                            response.rows.forEach(function (row, i) {
+                                data.push({
+                                    label: row[0],
+                                    value: +row[1],
+                                    color: colors[i]
                                 });
-
-                                new Chart(makeCanvas('chart-4-container')).Doughnut(data);
-                                generateLegend('legend-4-container', data);
                             });
+
+                            new Chart(makeCanvas('chart-4-container')).Doughnut(data);
+                            generateLegend('legend-4-container', data);
+                        });
                 }
 
 
@@ -450,10 +450,10 @@
                         data.once('success', function (response) {
                             resolve(response);
                         })
-                                .once('error', function (response) {
-                                    reject(response);
-                                })
-                                .execute();
+                            .once('error', function (response) {
+                                reject(response);
+                            })
+                            .execute();
                     });
                 }
 
