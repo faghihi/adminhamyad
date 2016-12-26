@@ -30,7 +30,7 @@ class Pack extends Model
     }
     public function takes()
     {
-        return $this->belongsToMany('App\User', 'takepack')
+        return $this->belongsToMany('App\NormalUser', 'takepack','pack_id','user_id')
             ->withPivot('start','end','paid','discount_used')
             ->withTimestamps();
     }

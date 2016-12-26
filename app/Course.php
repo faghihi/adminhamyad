@@ -60,19 +60,6 @@ class Course extends Model
     }
 
     /**
-     * ManyToMany with User Table
-     * Pivot table is certificate table
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function users_certificate()
-    {
-        return $this->belongsToMany('App\User', 'certificate')
-            ->withPivot('point','description')
-            ->withTimestamps();
-    }
-
-    /**
      * ManyToMany with Course Table
      * Pivot table is take table
      *
@@ -80,7 +67,7 @@ class Course extends Model
      */
     public function users_take()
     {
-        return $this->belongsToMany('App\User', 'take')
+        return $this->belongsToMany('App\NormalUser', 'take','course_id','user_id')
             ->withPivot('paid','discount_used')
             ->withTimestamps();
     }
@@ -105,7 +92,7 @@ class Course extends Model
      */
     public function rates()
     {
-        return $this->belongsToMany('App\User', 'course_rates')
+        return $this->belongsToMany('App\NormalUser', 'course_rates','course_id','user_id')
             ->withPivot('rate')
             ->withTimestamps();
     }

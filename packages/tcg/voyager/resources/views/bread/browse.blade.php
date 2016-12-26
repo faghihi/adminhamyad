@@ -84,6 +84,11 @@
                                                     &nbsp;اسامی شرکت کنندگان&nbsp;<i class="voyager-eye"></i>
                                                 </a>
                                             @endif
+                                            @if($dataType->slug == 'packs')
+                                                <a href="{{ route('voyager.bread.packparticipation', $data->id) }}" class="btn-sm btn-success pull-right" style="margin-left: 7px">
+                                                    &nbsp;اسامی شرکت کنندگان&nbsp;<i class="voyager-eye"></i>
+                                                </a>
+                                            @endif
                                         <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
                                             &nbsp;حذف &nbsp;<i class="voyager-trash"></i>
                                         </div>

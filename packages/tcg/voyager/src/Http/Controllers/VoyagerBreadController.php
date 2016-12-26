@@ -3,6 +3,7 @@
 namespace TCG\Voyager\Http\Controllers;
 
 use App\Course;
+use App\Pack;
 use App\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -387,6 +388,25 @@ class VoyagerBreadController extends Controller
     public function participation($id)
     {
         $course=Course::findorfail($id);
-        return view('showstudents');
+        $users=$course->users_take;
+        foreach ($users as $user){
+            $user['paid']=$user->pivot->paid;
+            $user['discount_used']=$user->pivot->discount_used;
+        }
+//        return $users;
+        return view('showstudents',compact('users',$users))->with('key','course');
+    }
+    public function pparticipation($id)
+    {
+        $pack=Pack::findorfail($id);
+        $users=$pack->takes;
+        foreach ($users as $user){
+            $user['paid']=$user->pivot->paid;
+            $user['discount_used']=$user->pivot->discount_used;
+            $user['start']=$user->pivot->start;
+            $user['end']=$user->pivot->end;
+        }
+//        return $users;
+        return view('showstudents',compact('users',$users))->with('key','pack');
     }
 }

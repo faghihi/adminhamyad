@@ -29,14 +29,14 @@ class Section extends Model
     }
     public function rates()
     {
-        return $this->belongsToMany('App\User', 'section_rates')
+        return $this->belongsToMany('App\NormalUser', 'section_rates','section_id','user_id')
             ->withPivot('rate')
             ->withTimestamps();
     }
 
     public function favorite_sections()
     {
-        return $this->belongsToMany('App\User', 'favorite_sections')
+        return $this->belongsToMany('App\NormalUser', 'favorite_sections','section_id','user_id')
             ->withTimestamps();
     }
 }
