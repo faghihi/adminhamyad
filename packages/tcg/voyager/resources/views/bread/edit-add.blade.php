@@ -198,37 +198,37 @@
                                             <br>
                                         @endforeach
                                     @endif
+                                        <div class="panel-group" id="accordion" style="margin-left: 15px;margin-right: 15px;">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span> </a>course 1
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse1" class="panel-collapse collapse in">
+                                                    <div class="panel-body"><p>name</p><p>time</p></div>
+                                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span></a>course 2
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse2" class="panel-collapse collapse">
+                                                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                                                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                                        commodo consequat.</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 @endif
 
 
 
                         </div><!-- panel-body -->
-                        <div class="panel-group" id="accordion" style="margin-left: 15px;margin-right: 15px;">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span> </a>course 1
-                                    </h4>
-                                </div>
-                                <div id="collapse1" class="panel-collapse collapse in">
-                                    <div class="panel-body"><p>name</p><p>time</p></div>
-                                    <div class="panel-footer"><input type="button" class="btn btn-primary" value="edit"> <input type="button" class="btn btn-success" value="browse"> </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span></a>course 2
-                                    </h4>
-                                </div>
-                                <div id="collapse2" class="panel-collapse collapse">
-                                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodo consequat.</div>
-                                </div>
-                            </div>
-                        </div>
 
 
                         <!-- PUT Method if we are editing -->
