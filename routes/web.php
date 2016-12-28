@@ -12,25 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/admin');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Route::get('/test',function(){
-   return \App\User::all();
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/Picker','\TCG\Voyager\Http\Controllers\VoyagerMediaController@picker');
-Route::get('/Test',function (){
-    return view('test');
-});
+//Route::get('/Picker','\TCG\Voyager\Http\Controllers\VoyagerMediaController@picker');
+//Route::get('/Test',function (){
+//    return view('test');
+//});
 
-Route::get('configs',function (){
-    phpinfo();
-});
+//Route::get('configs',function (){
+//    phpinfo();
+//});

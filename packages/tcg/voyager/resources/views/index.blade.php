@@ -7,19 +7,19 @@
 @section('content')
     <div class="page-content">
         <div class="widgets">
-            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new TCG\Voyager\Models\User())->getTable())) { ?>
+            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new \App\NormalUser())->getTable())) { ?>
             <div class="panel widget center bgimage" style="background-image:url({{ config('voyager.assets_path') }}/images/widget-backgrounds/02.png);">
                 <div class="dimmer"></div>
                 <div class="panel-content">
                     <i class="voyager-group"></i>
-                    <?php $user_count = TCG\Voyager\Models\User::count(); ?>
+                    <?php $user_count = \App\NormalUser::count(); ?>
                     <h4 style="direction: rtl !important;"> {{ $user_count }} کاربر  </h4>
 
                     <a href="/{{ config('voyager.routes.prefix') }}/users" class="btn btn-primary">مشاهده تمام کاربران</a>
                 </div>
             </div>
             <?php } ?>
-            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new TCG\Voyager\Models\Post())->getTable())) { ?>
+            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new \App\Course())->getTable())) { ?>
             <div class="panel widget center bgimage" style="background-image:url({{ config('voyager.assets_path') }}/images/widget-backgrounds/03.png);">
                 <div class="dimmer"></div>
                 <div class="panel-content">
@@ -31,12 +31,12 @@
                 </div>
             </div>
             <?php } ?>
-            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new TCG\Voyager\Models\Page())->getTable())) { ?>
+            <?php if (Illuminate\Support\Facades\Schema::hasTable(with(new \App\Pack())->getTable())) { ?>
             <div class="panel widget center bgimage" style="background-image:url({{ config('voyager.assets_path') }}/images/widget-backgrounds/04.png);">
                 <div class="dimmer"></div>
                 <div class="panel-content">
                     <i class="voyager-file-text"></i>
-                    <?php $page_count = TCG\Voyager\Models\Page::count(); ?>
+                    <?php $page_count = \App\Pack::count(); ?>
                     <h4 style="direction: rtl !important;"> {{ $page_count }} اشتراک </h4>
 
                     <a href="/{{ config('voyager.routes.prefix') }}/packs" class="btn btn-primary">مشاهده تمام اشتراک ها</a>

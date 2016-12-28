@@ -449,7 +449,7 @@
                 }
                 if(data.msg==3){
                     toastr.success('selected', "Sweet Success!");
-                    $('#add_course_modal').modal('hide');
+                    $('#add_instructor_modal').modal('hide');
                 }
 
                 },error:function(){
