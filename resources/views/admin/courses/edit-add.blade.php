@@ -190,9 +190,9 @@
                         </div>
                             <br>
                         @if(isset($dataTypeContent->id))
-                      <a href="{{url('/admin/sections/create')}}"><button type="button" class="btn btn-primary" id="addSection"><i class="voyager-new"></i>
-                            افزودن
-                        </button></a>
+                      {{--<a href="{{url('/admin/sections/create')}}"><button type="button" class="btn btn-primary" id="addSection"><i class="voyager-new"></i>--}}
+                            {{--افزودن--}}
+                        {{--</button></a>--}}
                             @endif
                     </div>
                 </div>
