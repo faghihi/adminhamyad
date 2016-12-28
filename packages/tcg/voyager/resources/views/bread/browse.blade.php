@@ -3,7 +3,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
-        @if($dataType->slug != 'contacts' && $dataType->slug != 'reviews')
+        @if($dataType->slug != 'contacts' && $dataType->slug != 'reviews' && $dataType->slug != 'cooperate')
             <a href="{{ route($dataType->slug.'.create') }}" class="btn btn-success">
                 افزودن
                 <i class="voyager-plus"></i></a>

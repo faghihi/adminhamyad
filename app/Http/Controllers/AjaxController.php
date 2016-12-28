@@ -35,6 +35,25 @@ class AjaxController extends Controller
 //        return response()->json(array('msg'=> 3), 200);
 
     }
+    public function AddInstructor()
+    {
+        if(! isset($_REQUEST['conceptName']) ||!isset($_REQUEST['courseId'])){
+            return response()->json(array('msg'=>1), 200);
+        }
+        $conceptName = $_REQUEST['conceptName'];
+        $courseId = $_REQUEST['courseId'];
+        $course = Course::find($courseId);
+
+        try{
+            $course->teachers()->attach($conceptName);
+        }
+        catch ( \Illuminate\Database\QueryException $e){
+            return response()->json(array('msg'=> 2), 200);
+        }
+        return response()->json(array('msg'=> 3), 200);
+
+    }
+
     public function AddSection()
     {
         if(! isset($_REQUEST['conceptName']) ||!isset($_REQUEST['courseId'])){

@@ -92,6 +92,8 @@ Route::group(['middleware' => ['web', 'admin.user']], function () {
         ['uses' => 'VoyagerBreadController@pparticipation', 'as' => 'voyager.bread.packparticipation']);
     Route::post('addCourseInModal',
         ['uses' => '\App\Http\Controllers\AjaxController@AddCourse', 'as' => 'voyager.bread.edit-add']);
+    Route::post('addInstructorInModal',
+        ['uses' => '\App\Http\Controllers\AjaxController@AddInstructor', 'as' => 'voyager.bread.instructor-add']);
 //    Route::get('addCourseInModal',
 //        ['uses' => '\App\Http\Controllers\AjaxController@AddCourse', 'as' => 'voyager.bread.edit-add']);
 });

@@ -189,12 +189,78 @@
                                 @endif
                         </div>
                             <br>
-                        @if(isset($dataTypeContent->id))
-                      {{--<a href="{{url('/admin/sections/create')}}"><button type="button" class="btn btn-primary" id="addSection"><i class="voyager-new"></i>--}}
-                            {{--افزودن--}}
-                        {{--</button></a>--}}
-                            @endif
                     </div>
+                    @if(isset($dataTypeContent->id))
+                        <p hidden id="packId">{{ $dataTypeContent->id }}</p>
+                        <h3 style="direction: rtl;">اساتید</h3>
+                        <div class="modal fade modal-warning" id="add_instructor_modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title"><i class="voyager-character"></i>اضافه کردن استاد</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <?php
+                                        $x = array();
+                                        $ids=array();
+                                        foreach ($dataTypeContent->teachers as $c){
+                                            $ids[]=$c->id;
+                                        }
+                                        foreach (App\Teacher::all() as $item){
+                                            if (! in_array($item->id, $ids)){
+                                                $x[] = $item;
+                                            }
+                                        }
+
+                                        ?>
+                                        @if(empty($x))
+                                            همه ی اساتید موجود در سیستم در این درس همکاری دارند
+                                        @else
+                                            <h4>اضافه کردن استاد</h4>
+
+                                            <select id="new_TeacherName" class="form-control">
+                                                @foreach($x as $item)
+                                                    <option value="{{ $item->id }}">Name: {{ $item->name }}, id: {{ $item->id }}</option>
+                                                    {{--<option >{{ $item }}</option>--}}
+                                                @endforeach
+                                                @endif
+
+                                            </select>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-warning" id="add_instructor"
+                                                onclick="addi(event)"
+                                                data-link="{{ url('/admin/addInstructorInModal') }}"
+                                                data-token="{{ csrf_token() }}">اضافه کردن</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button  type="button" class="btn btn-primary" id="addInstructor"><i class="voyager-upload"></i>
+                            Add
+                        </button>
+                        <br>
+                        <div class="panel-group" id="accordion" style="margin-left: 15px;margin-right: 15px;">
+                            @foreach($dataTypeContent->teachers as $t)
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="float: left;"><span class="caret"></span> </a>{{$t['name']}}
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="panel-footer"><a href="{{url('/admin/teachers/'.$t['id'].'/edit')}}"><input type="button" class="btn btn-primary" value="edit"></a> <a href="{{url('/admin/teachers/'.$t['id'])}}"><input type="button" class="btn btn-success" value="browse"></a> </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <div class="col-md-4">
                     <!-- ### DETAILS ### -->
@@ -354,50 +420,49 @@
             console.log(tags);
             return true;
         }
-        {{--function addsection(e){--}}
-            {{--var conceptName = $('#new_sectionName').find(":selected").val();--}}
-            {{--var CourseId = $('#courseId').text();--}}
-            {{--var t=e.target;--}}
-            {{--var url = $(t).attr('data-link');--}}
+        function addi(e) {
+            var conceptName = $('#new_TeacherName').find(":selected").val();
+            var CourseId = $('#courseId').text();
+            var t = e.target;
+            var url = $(t).attr('data-link');
 
-            {{--//add it to your data--}}
-            {{--var data = {--}}
-                {{--_token:$(this).data('token'),--}}
-                {{--conceptName : conceptName,--}}
-                {{--courseId : CourseId--}}
-            {{--};--}}
-            {{--console.log(CourseId);--}}
-            {{--console.log(url);--}}
-            {{--console.log(conceptName);--}}
+            /*add it to your data*/
+            var data = {
+            _token:$(this).data('token'),
+            conceptName : conceptName,
+            courseId : CourseId
+            };
+            console.log(CourseId);
+            console.log(url);
+            console.log(conceptName);
 
-            {{--$.ajax({--}}
-                {{--url: url,--}}
-                {{--type:"POST",--}}
-                {{--data: data,--}}
-                {{--success:function(data){--}}
-                    {{--// alert(data.msg);--}}
-                    {{--if(data.msg==1){--}}
-                        {{--toastr.error('not possible', "Whoops!");--}}
-                    {{--}--}}
-                    {{--if(data.msg==2){--}}
-                        {{--toastr.error('not possibllllle', "Whoops!");--}}
-                    {{--}--}}
-                    {{--if(data.msg==3){--}}
-                        {{--toastr.success('selected', "Sweet Success!");--}}
-                        {{--$('#add_course_modal').modal('hide');--}}
-                    {{--}--}}
+            $.ajax({
+                url: url,
+                type:"POST",
+                data: data,
+                success:function(data){
+                if(data.msg==1){
+                    toastr.error('not possible', "Whoops!");
+                }
+                if(data.msg==2){
+                    toastr.error('not possibllllle', "Whoops!");
+                }
+                if(data.msg==3){
+                    toastr.success('selected', "Sweet Success!");
+                    $('#add_course_modal').modal('hide');
+                }
 
-                {{--},error:function(){--}}
-                    {{--toastr.error('not Connection', "Whoops!");--}}
-                {{--}--}}
-            {{--});--}}
-        {{--}--}}
-        {{--$('#addSection').click(function(){--}}
-            {{--$('#add_section_modal').modal('show');--}}
-        {{--});--}}
+                },error:function(){
+                toastr.error('not Connection', "Whoops!");
+                }
+            });
+        }
 
         $('#choose').click(function(){
             $('#choose_file_modal').modal('show');
+        });
+        $('#addInstructor').click(function(){
+            $('#add_instructor_modal').modal('show');
         });
 
     </script>
