@@ -7,6 +7,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{ config('voyager.assets_path') }}/ExtraLib/tag-it.js" type="text/javascript" charset="utf-8"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ config('voyager.assets_path') }}/css/media/media.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ config('voyager.assets_path') }}/js/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ config('voyager.assets_path') }}/css/media/dropzone.css"/>
+    <style>
+        .panel-body {
+            direction: rtl;
+        }
+    </style>
     <style>
         .panel .mce-panel {
             border-left-color: #fff;
@@ -81,7 +90,7 @@
 
 @section('content')
     <div class="page-content container-fluid">
-        <form role="form" action="@if(isset($dataTypeContent->id)){{ route('posts.update', $dataTypeContent->id) }}@else{{ route('posts.store') }}@endif" method="POST" enctype="multipart/form-data">
+        <form role="form" action="@if(isset($dataTypeContent->id)){{ route('courses.update', $dataTypeContent->id) }}@else{{ route('courses.store') }}@endif" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8">
@@ -97,7 +106,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" name="title" placeholder="Title" value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
+                            <input type="text" class="form-control" name="name" placeholder="اسم دوره" value="@if(isset($dataTypeContent->name)){{ $dataTypeContent->name }}@endif">
                         </div>
                     </div>
 
@@ -109,7 +118,7 @@
                                 <a class="panel-action icon wb-expand" data-toggle="panel-fullscreen" aria-hidden="true"></a>
                             </div>
                         </div>
-                        <textarea class="richTextBox" name="body" style="border:0px;">
+                        <textarea class="richTextBox" name="description" style="border:0px;">
                             @if(isset($dataTypeContent->description)){{ $dataTypeContent->description }}@endif
                         </textarea>
                     </div><!-- .panel -->
@@ -133,14 +142,12 @@
                         </div>
                         <?php $tagss=\App\Tag::all();?>
 
-                        <form>
                             <input name="tags" id="singleFieldTags2" value="
                             @if (isset($dataTypeContent->tags))
                             @foreach($dataTypeContent->tags as $tag)
                             {{$tag->tag_name}}
                                     , @endforeach
                             @endif">
-                        </form>
                         <script> var fruits = [];</script>
                         @if(isset($tagss))
                             @foreach(\App\Tag::all() as $tag)
@@ -220,9 +227,12 @@
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                                <img src="{{ Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                                <img src="{{url('/storage'.$dataTypeContent->image )}}" style="width:100%" />
                             @endif
-                            <input type="file" name="image">
+                                <input type="text" name="image" class="Chooser"  value="@if(isset($dataTypeContent->id)){{$dataTypeContent->{'image'} }} @endif">
+                                <button type="button" class="btn btn-default" id="choose"><i class="voyager-character"></i>
+                                    انتخاب از فایل های سرور
+                                </button>
                         </div>
                     </div>
 
@@ -252,7 +262,7 @@
             <div id="courseId" hidden> @if(isset($dataTypeContent->id)){{$dataTypeContent->id}}@endif</div>
 
             <button type="submit" class="btn btn-primary pull-right">
-                @if(isset($dataTypeContent->id)){{ 'Update Post' }}@else<?= '<i class="icon wb-plus-circle"></i> Create New Post'; ?>@endif
+                @if(isset($dataTypeContent->id)){{ 'آپدیت اطلاعات دوره' }}@else<?= '<i class="icon wb-plus-circle"></i> ساخت دوره ی جدید'; ?>@endif
             </button>
         </form>
 
@@ -264,17 +274,52 @@
         </form>
     </div>
 
+    @include('filemodal')
 
-{{--    @include('addsectionmodal',array('dataTypeContent'=>$dataTypeContent));--}}
+
+    {{--    @include('addsectionmodal',array('dataTypeContent'=>$dataTypeContent));--}}
 @stop
 
 @section('javascript')
+    <script>
+        $('document').ready(function () {
+            $('.toggleswitch').bootstrapToggle();
+        });
+    </script>
     <script src="{{ config('voyager.assets_path') }}/lib/js/tinymce/tinymce.min.js"></script>
     <script src="{{ config('voyager.assets_path') }}/js/voyager_tinymce.js"></script>
-    {{--<script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>--}}
-    {{--<script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>--}}
-    {{--<script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>--}}
-    {{--<script type="text/javascript">--}}
+    <script src="{{ config('voyager.assets_path') }}/js/select2/select2.min.js"></script>
+    <script src="{{ config('voyager.assets_path') }}/js/media/dropzone.js"></script>
+    <script src="{{ config('voyager.assets_path') }}/js/media/media.js"></script>
+    <script type="text/javascript">
+        var media = new VoyagerMedia({
+            baseUrl: "{{ route('voyager.dashboard') }}"
+        });
+        $(function () {
+            media.init();
+        });
+        function alerts(e) {
+            var model=$('.selected .details a').text()
+            if(model=='folder'){
+                toastr.error('not possible', "Whoops!");
+            }
+            else
+            {
+                var ok=$('.selected .details p').text();
+                ok=ok.split('/');
+                var str ="";
+                for (var i=2; i< ok.length; i++){
+                    if(i==1)
+                        str +=ok[i];
+                    else
+                        str+='/'+ok[i];
+                }
+                $('.Chooser').val(str);
+                toastr.success('selected', "Sweet Success!");
+                $('#choose_file_modal').modal('hide');
+            }
+
+        }
         {{--function addsection(e){--}}
             {{--var conceptName = $('#new_sectionName').find(":selected").val();--}}
             {{--var CourseId = $('#courseId').text();--}}
@@ -316,6 +361,11 @@
         {{--$('#addSection').click(function(){--}}
             {{--$('#add_section_modal').modal('show');--}}
         {{--});--}}
-    {{--</script>--}}
+
+        $('#choose').click(function(){
+            $('#choose_file_modal').modal('show');
+        });
+
+    </script>
 @stop
 

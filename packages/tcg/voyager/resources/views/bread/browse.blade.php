@@ -45,7 +45,11 @@
                                         <td>
 
                                             @if($row->type == 'image')
-                                                <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+                                                @if(! empty($data->{$row->field}))
+                                                <img src="@if( strpos($data->{$row->field}, 'http://') === false && strpos($data->{$row->field}, 'https://') === false ){{ url('storage'.$data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+                                                @else
+                                                    عکسی موجود نمیباشد
+                                                @endif
                                             @elseif($row->display_name == Config::get('settings.user'))
                                                 {{\App\NormalUser::find($data->{$row->field})->email }}
                                             @elseif($row->display_name == Config::get('settings.course_name'))
