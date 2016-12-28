@@ -209,7 +209,6 @@
     <div id="login_section">
         <div class="content">
             <h2>ورود</h2>
-            <p>در ثبت نام زیر:
             </p>
             <div style="clear:both"></div>
             <form action="{{ route('voyager.login') }}" method="POST" id="login">
