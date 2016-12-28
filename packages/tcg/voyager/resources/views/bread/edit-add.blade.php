@@ -192,7 +192,7 @@
                                                 @elseif($row->type == "file" && isset($dataTypeContent->{$row->field}))
                                                     <div class="fileType">{{ $dataTypeContent->{$row->field} }} }}</div>
                                                 @endif
-                                                <input type="text" name="{{ $row->field }}" class="Chooser" >{{-- value="@if(isset($dataTypeContent->id)){{$dataTypeContent->{$row->field} }} @endif"--}}
+                                                <input type="text" name="{{ $row->field }}" class="Chooser"  value="@if(isset($dataTypeContent->id)){{$dataTypeContent->{$row->field} }}@endif">
                                                 <button type="button" class="btn btn-default" id="choose"><i class="voyager-character"></i>
                                                     انتخاب از فایل های سرور
                                                 </button>

@@ -295,7 +295,7 @@
                             @if(isset($dataTypeContent->image))
                                 <img src="{{url('/storage'.$dataTypeContent->image )}}" style="width:100%" />
                             @endif
-                                <input type="text" name="image" class="Chooser"  value="@if(isset($dataTypeContent->id)){{$dataTypeContent->{'image'} }} @endif">
+                                <input type="text" name="image" class="Chooser"  value="@if(isset($dataTypeContent->id)){{$dataTypeContent->{'image'} }}@endif">
                                 <button type="button" class="btn btn-default" id="choose"><i class="voyager-character"></i>
                                     انتخاب از فایل های سرور
                                 </button>
