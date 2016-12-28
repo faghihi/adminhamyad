@@ -90,7 +90,7 @@
 
 @section('content')
     <div class="page-content container-fluid">
-        <form role="form" action="@if(isset($dataTypeContent->id)){{ route('courses.update', $dataTypeContent->id) }}@else{{ route('courses.store') }}@endif" method="POST" enctype="multipart/form-data">
+        <form onsubmit="return ajaxthings()" role="form" action="@if(isset($dataTypeContent->id)){{ route('courses.update', $dataTypeContent->id) }}@else{{ route('courses.store') }}@endif" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-8">
@@ -251,6 +251,32 @@
                             </div>
                         </div>
                     </div>
+
+                    {{--Producer --}}
+                    <?php
+                        if(isset($dataTypeContent->id)){
+                            $course=\App\Course::find($dataTypeContent->id);
+                            $provider=$course->provider;
+                        }
+                        ?>
+                    <div class="panel panel panel-bordered panel-warning">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="icon wb-clipboard"></i>تولید کننده</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action icon wb-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="name">انتخاب تولید کننده</label>
+                                <select class="form-control" name="provider_id">
+                                    @foreach(\App\Provider::all() as $p)
+                                        <option value="{{ $p->id }}" @if(! empty($provider[0]) && $provider[0]['id'] == $p->id){{ 'selected="selected"' }}@endif>{{ $p->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -273,6 +299,8 @@
             <input type="hidden" name="type_slug" id="type_slug" value="{{ $dataType->slug }}">
         </form>
     </div>
+
+
 
     @include('filemodal')
 
@@ -319,6 +347,12 @@
                 $('#choose_file_modal').modal('hide');
             }
 
+        }
+
+        function ajaxthings() {
+            var tags=$('input[name="tags"]').val();
+            console.log(tags);
+            return true;
         }
         {{--function addsection(e){--}}
             {{--var conceptName = $('#new_sectionName').find(":selected").val();--}}

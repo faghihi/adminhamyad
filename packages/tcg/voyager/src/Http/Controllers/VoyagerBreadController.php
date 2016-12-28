@@ -5,6 +5,7 @@ namespace TCG\Voyager\Http\Controllers;
 use App\Course;
 use App\Pack;
 use App\Provider;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -114,7 +115,32 @@ class VoyagerBreadController extends Controller
         $dataType = DataType::where('slug', '=', $slug)->first();
         $data = call_user_func([$dataType->model_name, 'find'], $id);
         $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
-
+        if($slug=='courses' && isset($request['tags'])){
+            $tags=$request['tags'];
+            $data->tags()->detach();
+            if(! empty($tags)){
+                $tagss=explode(',',$tags);
+                foreach ($tagss as $tag){
+                    $tag=Tag::where('tag_name',$tag)->first();
+                    try{
+                        $data->tags()->attach($tag->id);
+                    }
+                    catch ( \Illuminate\Database\QueryException $e){
+                        return view('errors.500');
+                    }
+                }
+            }
+        }
+        if($slug=='courses'){
+            $provider=$request['provider_id'];
+            $data->provider()->detach();
+            try{
+                $data->provider()->attach($provider);
+            }
+            catch ( \Illuminate\Database\QueryException $e){
+                return view('errors.500');
+            }
+        }
         return redirect()
             ->route("{$dataType->slug}.index")
             ->with([
@@ -165,6 +191,32 @@ class VoyagerBreadController extends Controller
 
         $data = new $dataType->model_name();
         $this->insertUpdateData($request, $slug, $dataType->addRows, $data);
+        if($slug=='courses' && isset($request['tags'])){
+            $tags=$request['tags'];
+           if(! empty($tags)){
+               $tagss=explode(',',$tags);
+               foreach ($tagss as $tag){
+                   $tag=Tag::where('tag_name',$tag)->first();
+                   try{
+                       $data->tags()->attach($tag->id);
+                   }
+                   catch ( \Illuminate\Database\QueryException $e){
+                       return view('errors.500');
+                   }
+               }
+           }
+        }
+
+        if($slug=='courses'){
+            $provider=$request['provider_id'];
+            $data->provider()->detach();
+            try{
+                $data->provider()->attach($provider);
+            }
+            catch ( \Illuminate\Database\QueryException $e){
+                return view('errors.500');
+            }
+        }
 
         return redirect()
             ->route("{$dataType->slug}.index")
