@@ -325,38 +325,38 @@
 
                         <?= Menu::display('admin', 'admin_menu'); ?>
 
-                        {{--<li class="dropdown">--}}
-                            {{--<a data-toggle="collapse" href="#tools-dropdown-element">--}}
-                                {{--<span class="icon voyager-tools"></span>--}}
-                                {{--<span class="title">ابزار</span>--}}
-                                {{--<span class="site-menu-arrow"></span>--}}
-                            {{--</a>--}}
+                        <li class="dropdown">
+                            <a data-toggle="collapse" href="#tools-dropdown-element">
+                                <span class="icon voyager-tools"></span>
+                                <span class="title">ابزار</span>
+                                <span class="site-menu-arrow"></span>
+                            </a>
 
-                            {{--<div id="tools-dropdown-element" class="panel-collapse collapse">--}}
-                                {{--<div class="panel-body">--}}
-                                    {{--<ul class="nav navbar-nav">--}}
-                                        {{--<li>--}}
-                                            {{--<a href="/{{config('voyager.routes.prefix')}}/menus">--}}
-                                                {{--<span class="icon voyager-list"></span>--}}
-                                                {{--<span class="title">سازنده فهرست</span>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li>--}}
-                                            {{--<a class="animsition-link" href="{{ route('voyager.database') }}">--}}
-                                                {{--<span class="icon voyager-data"></span>--}}
-                                                {{--<span class="title">پایگاه داده</span>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<a href="{{ route('voyager.settings') }}">--}}
-                                {{--<span class="icon voyager-settings"></span>--}}
-                                {{--<span class="title">تنظیمات</span>--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
+                            <div id="tools-dropdown-element" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li>
+                                            <a href="/{{config('voyager.routes.prefix')}}/menus">
+                                                <span class="icon voyager-list"></span>
+                                                <span class="title">سازنده فهرست</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="animsition-link" href="{{ route('voyager.database') }}">
+                                                <span class="icon voyager-data"></span>
+                                                <span class="title">پایگاه داده</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ route('voyager.settings') }}">
+                                <span class="icon voyager-settings"></span>
+                                <span class="title">تنظیمات</span>
+                            </a>
+                        </li>
                         </ul>
                         <!-- /.navbar-collapse -->
                     </div>
